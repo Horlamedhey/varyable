@@ -1,0 +1,311 @@
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap");
+@import "tailwindcss";
+
+:root {
+  --bg: #080b10;
+  --bg-soft: #0c111a;
+  --panel: #121a26;
+  --panel-2: #161f2d;
+  --border: #27364f;
+  --text: #f1f6fb;
+  --muted: #95a6be;
+  --accent: #2dd4bf;
+  --accent-2: #4f7cff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--bg);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+  line-height: 1.55;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Space Grotesk", "Futura", "Trebuchet MS", sans-serif;
+  text-shadow:
+    0 0 0.6px rgba(241, 246, 251, 0.45),
+    0 6px 22px rgba(79, 124, 255, 0.08);
+}
+
+a {
+  text-decoration: none;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 30%, transparent);
+  color: var(--text);
+}
+
+.annotation {
+  font-family: "Caveat", cursive;
+  letter-spacing: 0.02em;
+  text-shadow:
+    0 0 0.8px rgba(241, 246, 251, 0.35),
+    0 6px 18px rgba(45, 212, 191, 0.12);
+}
+
+.hand-card {
+  position: relative;
+  border: 1px solid var(--border);
+  border-radius: 1.2rem;
+  background:
+    linear-gradient(165deg, var(--panel), var(--panel-2)),
+    radial-gradient(
+      circle at 16% 18%,
+      rgba(255, 255, 255, 0.04),
+      transparent 35%
+    ),
+    radial-gradient(
+      circle at 78% 26%,
+      rgba(45, 212, 191, 0.05),
+      transparent 42%
+    ),
+    radial-gradient(
+      circle at 20% 88%,
+      rgba(79, 124, 255, 0.05),
+      transparent 45%
+    ),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 180 180'%3E%3Cg fill='rgba(255,255,255,0.06)'%3E%3Ccircle cx='18' cy='26' r='0.9'/%3E%3Ccircle cx='62' cy='14' r='0.7'/%3E%3Ccircle cx='92' cy='38' r='0.8'/%3E%3Ccircle cx='148' cy='24' r='0.6'/%3E%3Ccircle cx='30' cy='82' r='0.7'/%3E%3Ccircle cx='76' cy='98' r='0.6'/%3E%3Ccircle cx='128' cy='84' r='0.7'/%3E%3Ccircle cx='162' cy='116' r='0.6'/%3E%3Ccircle cx='20' cy='148' r='0.7'/%3E%3Ccircle cx='54' cy='156' r='0.6'/%3E%3Ccircle cx='112' cy='150' r='0.7'/%3E%3Ccircle cx='154' cy='164' r='0.6'/%3E%3C/g%3E%3C/svg%3E");
+  background-blend-mode: normal, screen, screen, screen, overlay;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24);
+  transform: rotate(var(--tilt, 0deg));
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+
+.hand-card::before {
+  content: "";
+  position: absolute;
+  inset: 2px;
+  border-radius: 0.95rem;
+  pointer-events: none;
+  opacity: 0.75;
+  border: 1px solid rgba(241, 246, 251, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.hand-card::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px dashed rgba(149, 166, 190, 0.24);
+  border-radius: 0.95rem;
+  pointer-events: none;
+}
+
+.hand-card:hover {
+  border-color: color-mix(in srgb, var(--accent) 56%, var(--border));
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.34);
+  transform: translateY(-4px) rotate(var(--tilt, 0deg));
+}
+
+.hand-tilt-a {
+  --tilt: -0.85deg;
+}
+
+.hand-tilt-b {
+  --tilt: 0.8deg;
+}
+
+.hand-tilt-c {
+  --tilt: -0.25deg;
+}
+
+.squiggle-separator {
+  height: 24px;
+  opacity: 0.9;
+  background-repeat: repeat-x;
+  background-size: 240px 24px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='24' viewBox='0 0 240 24'%3E%3Cpath d='M0 12 C 14 6, 26 18, 40 12 S 66 6, 80 12 S 106 18, 120 12 S 146 6, 160 12 S 186 18, 200 12 S 226 6, 240 12' fill='none' stroke='%232dd4bf' stroke-width='1.75' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.accent-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--border));
+  border-radius: 999px;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.73rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 0.62rem 1rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  position: relative;
+  transition:
+    transform 200ms ease,
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+.btn-primary::after,
+.btn-secondary::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 999px;
+  pointer-events: none;
+  opacity: 0.35;
+  border: 1px dashed rgba(241, 246, 251, 0.28);
+  transform: rotate(var(--btn-tilt, -0.6deg));
+}
+
+.btn-secondary::after {
+  opacity: 0.26;
+  transform: rotate(var(--btn-tilt, 0.8deg));
+}
+
+.btn-primary {
+  border: 1px solid var(--accent);
+  background: var(--accent);
+  color: var(--bg);
+}
+
+.btn-secondary {
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--text);
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: translateY(-1px);
+}
+
+.btn-secondary:hover {
+  border-color: color-mix(in srgb, var(--accent) 48%, var(--border));
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text);
+  position: relative;
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease;
+}
+
+.project-link::after {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  border-radius: 999px;
+  pointer-events: none;
+  opacity: 0.18;
+  border: 1px dashed rgba(241, 246, 251, 0.24);
+  transform: rotate(-0.5deg);
+}
+
+.project-link:hover {
+  border-color: color-mix(in srgb, var(--accent) 50%, var(--border));
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
+  color: var(--text);
+}
+
+.project-link-disabled {
+  opacity: 0.65;
+  border-style: dashed;
+  cursor: not-allowed;
+}
+
+.hand-nav {
+  position: relative;
+  border: 1px solid rgba(232, 240, 255, 0.45);
+  border-radius: 12px 16px 12px 18px;
+  background:
+    linear-gradient(180deg, rgba(10, 14, 26, 0.92), rgba(14, 19, 33, 0.88)),
+    repeating-linear-gradient(
+      -4deg,
+      rgba(255, 255, 255, 0.03) 0px,
+      rgba(255, 255, 255, 0.03) 1px,
+      transparent 1px,
+      transparent 9px
+    );
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.hand-nav::after {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed rgba(232, 240, 255, 0.2);
+  border-radius: 10px 14px 11px 15px;
+  pointer-events: none;
+}
+
+.hand-nav::before {
+  content: "";
+  position: absolute;
+  left: 18px;
+  right: 18px;
+  bottom: 8px;
+  height: 8px;
+  opacity: 0.5;
+  background-repeat: repeat-x;
+  background-size: 220px 8px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='8' viewBox='0 0 220 8'%3E%3Cpath d='M0 4 C 14 1, 26 7, 40 4 S 66 1, 80 4 S 106 7, 120 4 S 146 1, 160 4 S 186 7, 200 4 S 214 1, 220 4' fill='none' stroke='rgba(241,246,251,0.5)' stroke-width='1.1' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .hand-card,
+  .hand-card:hover {
+    transform: none;
+  }
+}
