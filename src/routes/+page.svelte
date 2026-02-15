@@ -84,6 +84,7 @@
 	<meta name="description" content={portfolio.seo.description} />
 	<link rel="canonical" href={portfolio.seo.siteUrl} />
 	<meta property="og:type" content="website" />
+	<meta property="og:site_name" content={portfolio.seo.siteName} />
 	<meta property="og:title" content={portfolio.seo.title} />
 	<meta property="og:description" content={portfolio.seo.description} />
 	<meta property="og:url" content={portfolio.seo.siteUrl} />

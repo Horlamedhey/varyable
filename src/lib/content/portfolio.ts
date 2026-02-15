@@ -365,6 +365,7 @@ export const portfolio: PortfolioData = {
     title: "Abdulgafar Ajao ‹VaryAble/› | Senior Frontend & Full-Stack Engineer",
     description:
       "Portfolio of Abdulgafar Ajao showcasing production-grade frontend engineering, measurable business outcomes, and selected project case studies.",
+    siteName: "VaryAble",
     siteUrl: "https://varyable.vercel.app/",
     image: "https://varyable.vercel.app/og-image.svg",
   },

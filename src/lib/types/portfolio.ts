@@ -91,6 +91,7 @@ export interface ContactData {
 export interface SeoData {
 	title: string;
 	description: string;
+	siteName: string;
 	siteUrl: string;
 	image: string;
 }
