@@ -7,6 +7,8 @@
 		"dev": "vite dev",
 		"build": "vite build",
 		"preview": "vite preview",
+		"deploy:cloudflare": "npm run build && wrangler deploy",
+		"dev:cloudflare": "npm run build && wrangler dev",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
@@ -18,7 +20,7 @@
 	"devDependencies": {
 		"@eslint/js": "^9.39.2",
 		"@playwright/test": "^1.58.2",
-		"@sveltejs/adapter-vercel": "^6.3.1",
+		"@sveltejs/adapter-cloudflare": "^7.2.7",
 		"@sveltejs/kit": "^2.51.0",
 		"@sveltejs/vite-plugin-svelte": "^6.2.4",
 		"@tailwindcss/vite": "^4.1.18",
@@ -32,12 +34,12 @@
 		"typescript": "^5.9.3",
 		"typescript-eslint": "^8.55.0",
 		"vite": "^7.3.1",
-		"vitest": "^4.0.18"
+		"vitest": "^4.0.18",
+		"wrangler": "^4.65.0"
 	},
 	"dependencies": {
 		"@fontsource-variable/manrope": "^5.2.8",
 		"@fontsource-variable/space-grotesk": "^5.2.10",
-		"@fontsource/caveat": "^5.2.8",
-		"@vercel/analytics": "^1.6.1"
+		"@fontsource/caveat": "^5.2.8"
 	}
 }

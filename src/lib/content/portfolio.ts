@@ -366,7 +366,7 @@ export const portfolio: PortfolioData = {
     description:
       "Portfolio of Abdulgafar Ajao showcasing production-grade frontend engineering, measurable business outcomes, and selected project case studies.",
     siteName: "VaryAble",
-    siteUrl: "https://varyable.vercel.app/",
-    image: "https://varyable.vercel.app/og-image.svg",
+    siteUrl: "https://varyable.dev/",
+    image: "https://varyable.dev/og-image.svg",
   },
 };
