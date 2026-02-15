@@ -4,6 +4,11 @@ import { sveltekit } from '@sveltejs/kit/vite';
 
 export default defineConfig({
 	plugins: [tailwindcss(), sveltekit()],
+	build: {
+		minify: 'esbuild',
+		cssMinify: 'lightningcss',
+		sourcemap: false
+	},
 	test: {
 		environment: 'node',
 		include: ['src/**/*.test.ts'],
