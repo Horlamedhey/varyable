@@ -42,5 +42,8 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Lighthouse CI
+        run: npx lhci autorun --config=./lighthouserc.json
+
       - name: E2E smoke tests
         run: npm run test:e2e
