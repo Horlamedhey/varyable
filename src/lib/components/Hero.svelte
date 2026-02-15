@@ -1,12 +1,12 @@
 <script lang="ts">
 	import type { HeroData } from '$lib/types/portfolio';
 
-	let { hero } = $props<{ hero: HeroData }>();
+	let { hero, name } = $props<{ hero: HeroData; name: string }>();
 </script>
 
 <div class="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
 	<div class="space-y-6">
-		<h1 class="text-4xl font-black tracking-[-0.03em] text-(--text) sm:text-5xl lg:text-6xl">AbdulGafar</h1>
+		<h1 class="text-4xl font-black tracking-[-0.03em] text-(--text) sm:text-5xl lg:text-6xl">{name}</h1>
 		<p class="annotation text-2xl text-(--accent)">{hero.title}</p>
 		<p class="max-w-2xl text-lg text-(--muted)">{hero.subtitle}</p>
 		<div class="flex flex-wrap items-center gap-3">

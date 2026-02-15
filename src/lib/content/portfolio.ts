@@ -8,7 +8,7 @@ const sharedPlaceholderLinks = {
 
 export const portfolio: PortfolioData = {
   brand: {
-    name: "AbdulGafar",
+    name: "Abdulgafar Ajao",
     tag: "<VaryAble />",
     role: "Senior Frontend Engineer",
   },
@@ -362,9 +362,9 @@ export const portfolio: PortfolioData = {
     },
   },
   seo: {
-    title: "AbdulGafar </VaryAble> | Senior Frontend & Full-Stack Engineer",
+    title: "Abdulgafar Ajao ‹VaryAble/› | Senior Frontend & Full-Stack Engineer",
     description:
-      "Portfolio of AbdulGafar showcasing production-grade frontend engineering, measurable business outcomes, and selected project case studies.",
+      "Portfolio of Abdulgafar Ajao showcasing production-grade frontend engineering, measurable business outcomes, and selected project case studies.",
     siteUrl: "https://varyable.vercel.app/",
     image: "https://varyable.vercel.app/og-image.svg",
   },

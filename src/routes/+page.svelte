@@ -101,7 +101,7 @@
 
 	<main class="mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 pb-6 pt-28 sm:px-6 lg:px-8 lg:pt-32">
 		<section class="scroll-mt-28" data-section id="hero">
-			<Hero hero={portfolio.hero} />
+			<Hero hero={portfolio.hero} name={portfolio.brand.name} />
 		</section>
 
 		<div aria-hidden="true" class="squiggle-separator"></div>
@@ -151,5 +151,5 @@
 		</section>
 	</main>
 
-	<Footer year={currentYear} />
+	<Footer year={currentYear} name={portfolio.brand.name} />
 </div>
