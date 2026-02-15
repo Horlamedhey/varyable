@@ -282,8 +282,21 @@ a {
   cursor: not-allowed;
 }
 
-.hand-nav {
+.nav-shell-subtle {
   position: relative;
+  isolation: isolate;
+}
+
+.nav-shell-subtle > * {
+  position: relative;
+  z-index: 1;
+}
+
+.nav-shell-subtle::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
   border: 1px solid rgba(232, 240, 255, 0.45);
   border-radius: 12px 16px 12px 18px;
   background:
@@ -298,28 +311,116 @@ a {
   box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  opacity: 0;
+  transform: translateY(-1px);
+  will-change: opacity, transform;
+  transition:
+    opacity 240ms ease,
+    transform 240ms ease;
 }
 
-.hand-nav::after {
-  content: "";
-  position: absolute;
-  inset: 6px;
-  border: 1px dashed rgba(232, 240, 255, 0.2);
-  border-radius: 10px 14px 11px 15px;
-  pointer-events: none;
-}
-
-.hand-nav::before {
+.nav-shell-subtle::after {
   content: "";
   position: absolute;
   left: 18px;
   right: 18px;
   bottom: 8px;
   height: 8px;
-  opacity: 0.5;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-1px);
+  will-change: opacity, transform;
+  transition:
+    opacity 240ms ease,
+    transform 240ms ease;
   background-repeat: repeat-x;
   background-size: 220px 8px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='8' viewBox='0 0 220 8'%3E%3Cpath d='M0 4 C 14 1, 26 7, 40 4 S 66 1, 80 4 S 106 7, 120 4 S 146 1, 160 4 S 186 7, 200 4 S 214 1, 220 4' fill='none' stroke='rgba(241,246,251,0.5)' stroke-width='1.1' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+
+.nav-shell-subtle.nav-shell-visible::before,
+.nav-shell-subtle.nav-shell-visible::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav-link-subtle {
+  position: relative;
+  isolation: isolate;
+  will-change: transform;
+  transition: transform 160ms ease;
+}
+
+.nav-link-subtle::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.985);
+  background: radial-gradient(
+    circle at 50% 0%,
+    rgba(255, 255, 255, 0.14),
+    transparent 70%
+  );
+  will-change: opacity, transform;
+  transition:
+    opacity 160ms ease,
+    transform 160ms ease;
+}
+
+.nav-link-subtle:hover,
+.nav-link-subtle:focus-visible {
+  transform: translateY(-0.5px);
+}
+
+.nav-link-subtle:hover::after,
+.nav-link-subtle:focus-visible::after {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.nav-link-subtle[aria-current="page"]::after {
+  opacity: 0.24;
+  transform: scale(1);
+}
+
+.social-link-subtle {
+  position: relative;
+  isolation: isolate;
+  will-change: transform;
+  transition: transform 170ms ease;
+}
+
+.social-link-subtle::after {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.98);
+  background: linear-gradient(
+    130deg,
+    rgba(45, 212, 191, 0.15),
+    rgba(79, 124, 255, 0.1)
+  );
+  will-change: opacity, transform;
+  transition:
+    opacity 170ms ease,
+    transform 170ms ease;
+}
+
+.social-link-subtle:hover,
+.social-link-subtle:focus-visible {
+  transform: translateY(-0.5px);
+}
+
+.social-link-subtle:hover::after,
+.social-link-subtle:focus-visible::after {
+  opacity: 1;
+  transform: scale(1);
 }
 
 :focus-visible {
@@ -343,6 +444,23 @@ a {
 
   .hand-card,
   .hand-card:hover {
+    transform: none;
+  }
+
+  .nav-shell-subtle::before,
+  .nav-shell-subtle::after {
+    transition: none;
+    transform: none;
+  }
+
+  .nav-link-subtle,
+  .social-link-subtle {
+    transition: none;
+  }
+
+  .nav-link-subtle::after,
+  .social-link-subtle::after {
+    transition: none;
     transform: none;
   }
 }

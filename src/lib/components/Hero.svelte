@@ -15,7 +15,7 @@
 		</div>
 		<div class="flex flex-wrap items-center gap-2">
 			<a
-				class="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold text-(--text) transition hover:text-(--accent)"
+				class="social-link-subtle inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold text-(--text) hover:text-(--accent)"
 				href={hero.profiles.github}
 				rel="noreferrer"
 				target="_blank"
@@ -26,7 +26,7 @@
 				GitHub
 			</a>
 			<a
-				class="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold text-(--text) transition hover:text-(--accent)"
+				class="social-link-subtle inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold text-(--text) hover:text-(--accent)"
 				href={hero.profiles.linkedin}
 				rel="noreferrer"
 				target="_blank"
@@ -37,7 +37,7 @@
 				LinkedIn
 			</a>
 			<a
-				class="inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold text-(--text) transition hover:text-(--accent)"
+				class="social-link-subtle inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold text-(--text) hover:text-(--accent)"
 				href={hero.profiles.stackoverflow}
 				rel="noreferrer"
 				target="_blank"
