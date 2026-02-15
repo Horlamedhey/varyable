@@ -37,6 +37,7 @@
 	"dependencies": {
 		"@fontsource-variable/manrope": "^5.2.8",
 		"@fontsource-variable/space-grotesk": "^5.2.10",
-		"@fontsource/caveat": "^5.2.8"
+		"@fontsource/caveat": "^5.2.8",
+		"@vercel/analytics": "^1.6.1"
 	}
 }
