@@ -352,7 +352,7 @@ export const portfolio: PortfolioData = {
   },
   contact: {
     headline: "Let's build something impactful and production-grade.",
-    email: "gafarolamide.ajao@gmail.com",
+    email: "hello@varyable.dev",
     availabilityNote: "Typical response window: within 24 hours.",
     links: {
       linkedin: "https://www.linkedin.com",
@@ -365,7 +365,7 @@ export const portfolio: PortfolioData = {
     title: "AbdulGafar </VaryAble> | Senior Frontend & Full-Stack Engineer",
     description:
       "Portfolio of AbdulGafar showcasing production-grade frontend engineering, measurable business outcomes, and selected project case studies.",
-    siteUrl: "https://example.com",
-    image: "/og-image.svg",
+    siteUrl: "https://varyable.vercel.app/",
+    image: "https://varyable.vercel.app/og-image.svg",
   },
 };

@@ -26,7 +26,6 @@
 	let activeSection = $state('hero');
 	const currentYear = new Date().getFullYear();
 
-	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	const personJsonLd = $derived.by(() =>
 		JSON.stringify({
 			'@context': 'https://schema.org',
@@ -42,7 +41,7 @@
 				portfolio.hero.profiles.linkedin,
 				portfolio.hero.profiles.stackoverflow
 			]
-		})
+		}).replaceAll('<', '\\u003c')
 	);
 
 	onMount(() => {
@@ -92,7 +91,7 @@
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={portfolio.seo.title} />
 	<meta name="twitter:description" content={portfolio.seo.description} />
-	<script type="application/ld+json">{personJsonLd}</script>
+	<svelte:element this={"script"} type="application/ld+json">{personJsonLd}</svelte:element>
 </svelte:head>
 
 <Navbar activeSection={activeSection} brand={portfolio.brand} sections={navSections} />

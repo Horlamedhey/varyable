@@ -8,8 +8,8 @@ const config = {
 			mode: 'auto',
 			directives: {
 				'default-src': ["'self'"],
-				'style-src': ["'self'", "'unsafe-inline'", 'https://fonts.googleapis.com'],
-				'font-src': ["'self'", 'https://fonts.gstatic.com', 'data:'],
+				'style-src': ["'self'", "'unsafe-inline'"],
+				'font-src': ["'self'"],
 				'img-src': ["'self'", 'data:', 'https:'],
 				'script-src': ["'self'"],
 				'connect-src': ["'self'"],
