@@ -8,8 +8,11 @@
 	import Skills from '$lib/components/Skills.svelte';
 	import ContactCTA from '$lib/components/ContactCTA.svelte';
 	import Footer from '$lib/components/Footer.svelte';
-	import { portfolio } from '$lib/content/portfolio';
 	import type { NavSection } from '$lib/types/portfolio';
+	import type { PageData } from './$types';
+
+	let { data } = $props<{ data: PageData }>();
+	const portfolio = $derived(data.portfolio);
 
 	const navSections: NavSection[] = [
 		{ id: 'hero', label: 'Home' },
@@ -20,25 +23,27 @@
 		{ id: 'contact', label: 'Contact' }
 	];
 
-	let activeSection = 'hero';
+	let activeSection = $state('hero');
 	const currentYear = new Date().getFullYear();
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
-	const personJsonLd = JSON.stringify({
-		'@context': 'https://schema.org',
-		'@type': 'Person',
-		name: portfolio.brand.name,
-		jobTitle: portfolio.brand.role,
-		description: portfolio.seo.description,
-		url: portfolio.seo.siteUrl,
-		email: portfolio.contact.email,
-		homeLocation: portfolio.hero.location,
-		sameAs: [
-			portfolio.hero.profiles.github,
-			portfolio.hero.profiles.linkedin,
-			portfolio.hero.profiles.stackoverflow
-		]
-	});
+	const personJsonLd = $derived.by(() =>
+		JSON.stringify({
+			'@context': 'https://schema.org',
+			'@type': 'Person',
+			name: portfolio.brand.name,
+			jobTitle: portfolio.brand.role,
+			description: portfolio.seo.description,
+			url: portfolio.seo.siteUrl,
+			email: portfolio.contact.email,
+			homeLocation: portfolio.hero.location,
+			sameAs: [
+				portfolio.hero.profiles.github,
+				portfolio.hero.profiles.linkedin,
+				portfolio.hero.profiles.stackoverflow
+			]
+		})
+	);
 
 	onMount(() => {
 		const sectionElements = navSections
