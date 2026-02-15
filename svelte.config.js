@@ -11,8 +11,8 @@ const config = {
 				'style-src': ["'self'", "'unsafe-inline'"],
 				'font-src': ["'self'"],
 				'img-src': ["'self'", 'data:', 'https:'],
-				'script-src': ["'self'"],
-				'connect-src': ["'self'"],
+				'script-src': ["'self'", 'https://static.cloudflareinsights.com'],
+				'connect-src': ["'self'", 'https://cloudflareinsights.com'],
 				'base-uri': ["'self'"],
 				'form-action': ["'self'"],
 				'frame-ancestors': ["'none'"]
