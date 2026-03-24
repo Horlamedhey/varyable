@@ -1,15 +1,15 @@
 <script lang="ts">
-	import { onMount, tick } from 'svelte';
-	import Navbar from '$lib/components/Navbar.svelte';
-	import Hero from '$lib/components/Hero.svelte';
 	import BentoHighlights from '$lib/components/BentoHighlights.svelte';
+	import ContactCTA from '$lib/components/ContactCTA.svelte';
 	import ExperienceTimeline from '$lib/components/ExperienceTimeline.svelte';
+	import Footer from '$lib/components/Footer.svelte';
+	import Hero from '$lib/components/Hero.svelte';
+	import Navbar from '$lib/components/Navbar.svelte';
 	import Projects from '$lib/components/Projects.svelte';
 	import Skills from '$lib/components/Skills.svelte';
-	import ContactCTA from '$lib/components/ContactCTA.svelte';
-	import Footer from '$lib/components/Footer.svelte';
 	import { viewMode } from '$lib/stores/view-mode';
 	import type { NavSection } from '$lib/types/portfolio';
+	import { onMount, tick } from 'svelte';
 	import type { PageData } from './$types';
 
 	let { data } = $props<{ data: PageData }>();
@@ -131,7 +131,6 @@
 	});
 
 	$effect(() => {
-		const mode = $viewMode;
 		let cancelled = false;
 
 		void tick().then(() => {
