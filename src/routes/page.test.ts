@@ -8,6 +8,8 @@ describe('portfolio page', () => {
 		const { body } = render(Page, { props: { data: { portfolio } } });
 
 		expect(body).toContain('Senior Frontend &amp; Full-Stack Engineer');
+		expect(body).toContain('Focused');
+		expect(body).toContain('Expressive');
 		expect(body).toContain('Bento Highlights');
 		expect(body).toContain('Projects');
 		expect(body).toContain('Skills');
