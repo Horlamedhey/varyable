@@ -1,10 +1,12 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import { onMount } from 'svelte';
 	import type { ProjectItem, ProjectsData } from '$lib/types/portfolio';
 	import { getInitialProjectCount, getVisibleProjects, hasFilledLink } from '$lib/utils/projects';
-	import { viewMode } from '$lib/stores/view-mode';
+	import { viewMode, type ViewMode } from '$lib/stores/view-mode';
 
-	let { projects } = $props<{ projects: ProjectsData }>();
+	let { projects, mode = 'focused' } = $props<{ projects: ProjectsData; mode?: ViewMode }>();
+	const renderMode = $derived(browser ? $viewMode : mode);
 
 	let expanded = $state(false);
 	let initialCount = $state(6);
@@ -50,7 +52,7 @@
 	}
 </script>
 
-{#if $viewMode === 'focused'}
+{#if renderMode === 'focused'}
 	<div class="space-y-8">
 		<div>
 			<p class="annotation text-2xl text-(--accent)">Show your strongest work first</p>

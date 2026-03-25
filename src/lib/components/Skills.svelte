@@ -1,11 +1,13 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import type { SkillsData } from '$lib/types/portfolio';
-	import { viewMode } from '$lib/stores/view-mode';
+	import { viewMode, type ViewMode } from '$lib/stores/view-mode';
 
-	let { skills } = $props<{ skills: SkillsData }>();
+	let { skills, mode = 'focused' } = $props<{ skills: SkillsData; mode?: ViewMode }>();
+	const renderMode = $derived(browser ? $viewMode : mode);
 </script>
 
-{#if $viewMode === 'focused'}
+{#if renderMode === 'focused'}
 	<div class="grid gap-4 md:grid-cols-3">
 		<article class="hand-card hand-tilt-a p-5 sm:p-6">
 			<h3 class="text-xl font-extrabold text-(--text)">Frontend</h3>

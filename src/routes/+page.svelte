@@ -1,4 +1,5 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import BentoHighlights from '$lib/components/BentoHighlights.svelte';
 	import ContactCTA from '$lib/components/ContactCTA.svelte';
 	import ExperienceTimeline from '$lib/components/ExperienceTimeline.svelte';
@@ -14,6 +15,7 @@
 
 	let { data } = $props<{ data: PageData }>();
 	const portfolio = $derived(data.portfolio);
+	const renderMode = $derived(browser ? $viewMode : data.initialViewMode);
 
 	const navSections: NavSection[] = [
 		{ id: 'hero', label: 'Home' },
@@ -157,16 +159,23 @@
 	<meta property="og:description" content={portfolio.seo.description} />
 	<meta property="og:url" content={portfolio.seo.siteUrl} />
 	<meta property="og:image" content={portfolio.seo.image} />
+	<meta property="og:image:alt" content={portfolio.seo.description} />
+	<meta property="og:image:width" content="1200" />
+	<meta property="og:image:height" content="630" />
+	<meta property="og:image:type" content="image/png" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content={portfolio.seo.title} />
 	<meta name="twitter:description" content={portfolio.seo.description} />
+	<meta name="twitter:image" content={portfolio.seo.image} />
+	<meta name="twitter:image:alt" content={portfolio.seo.description} />
 	<svelte:element this={"script"} type="application/ld+json">{personJsonLd}</svelte:element>
 </svelte:head>
 
-{#if $viewMode === 'focused'}
+{#if renderMode === 'focused'}
 	<Navbar
 		activeSection={activeSection}
 		brand={portfolio.brand}
+		mode={renderMode}
 		onSectionSelect={setActiveSection}
 		sections={navSections}
 	/>
@@ -179,7 +188,12 @@
 
 		<main class="mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 pb-6 pt-28 sm:px-6 lg:px-8 lg:pt-32">
 			<section class="scroll-mt-28" data-section id="hero">
-				<Hero hero={portfolio.hero} name={portfolio.brand.name} tag={portfolio.brand.tag} />
+				<Hero
+					hero={portfolio.hero}
+					mode={renderMode}
+					name={portfolio.brand.name}
+					tag={portfolio.brand.tag}
+				/>
 			</section>
 
 			<div aria-hidden="true" class="squiggle-separator"></div>
@@ -189,7 +203,7 @@
 					<p class="annotation text-2xl text-(--accent)">Scan me in seconds</p>
 					<h2 class="text-3xl font-black tracking-[-0.03em] text-(--text)">Bento Highlights</h2>
 				</header>
-				<BentoHighlights highlights={portfolio.highlights} />
+				<BentoHighlights highlights={portfolio.highlights} mode={renderMode} />
 			</section>
 
 			<div aria-hidden="true" class="squiggle-separator"></div>
@@ -199,7 +213,7 @@
 					<p class="annotation text-2xl text-(--accent)">Execution history</p>
 					<h2 class="text-3xl font-black tracking-[-0.03em] text-(--text)">Experience Timeline</h2>
 				</header>
-				<ExperienceTimeline experience={portfolio.experience} />
+				<ExperienceTimeline experience={portfolio.experience} mode={renderMode} />
 			</section>
 
 			<div aria-hidden="true" class="squiggle-separator"></div>
@@ -209,7 +223,7 @@
 					<p class="annotation text-2xl text-(--accent)">Outcomes and depth</p>
 					<h2 class="text-3xl font-black tracking-[-0.03em] text-(--text)">Projects</h2>
 				</header>
-				<Projects projects={portfolio.projects} />
+				<Projects mode={renderMode} projects={portfolio.projects} />
 			</section>
 
 			<div aria-hidden="true" class="squiggle-separator"></div>
@@ -219,17 +233,17 @@
 					<p class="annotation text-2xl text-(--accent)">Practical toolkit</p>
 					<h2 class="text-3xl font-black tracking-[-0.03em] text-(--text)">Skills</h2>
 				</header>
-				<Skills skills={portfolio.skills} />
+				<Skills mode={renderMode} skills={portfolio.skills} />
 			</section>
 
 			<div aria-hidden="true" class="squiggle-separator"></div>
 
 			<section class="scroll-mt-28" data-section id="contact">
-				<ContactCTA contact={portfolio.contact} />
+				<ContactCTA contact={portfolio.contact} mode={renderMode} />
 			</section>
 		</main>
 
-		<Footer year={currentYear} name={portfolio.brand.name} />
+		<Footer mode={renderMode} year={currentYear} name={portfolio.brand.name} />
 	</div>
 {:else}
 	<div class="page-scene">
@@ -238,12 +252,18 @@
 				<Navbar
 					activeSection={activeSection}
 					brand={portfolio.brand}
+					mode={renderMode}
 					onSectionSelect={setActiveSection}
 					sections={navSections}
 				/>
 
 				<div class="board-body">
-					<Hero hero={portfolio.hero} name={portfolio.brand.name} tag={portfolio.brand.tag} />
+					<Hero
+						hero={portfolio.hero}
+						mode={renderMode}
+						name={portfolio.brand.name}
+						tag={portfolio.brand.tag}
+					/>
 
 					<div aria-hidden="true" class="board-divider"></div>
 
@@ -255,7 +275,7 @@
 								Strong outcomes, sharper frontend craft, and the tools behind the work.
 							</p>
 						</header>
-						<BentoHighlights highlights={portfolio.highlights} />
+						<BentoHighlights highlights={portfolio.highlights} mode={renderMode} />
 					</section>
 				</div>
 			</section>
@@ -268,7 +288,7 @@
 						Product work across frontend, full-stack delivery, and platform leadership.
 					</p>
 				</header>
-				<ExperienceTimeline experience={portfolio.experience} />
+				<ExperienceTimeline experience={portfolio.experience} mode={renderMode} />
 			</section>
 
 			<section class="folio-sheet scroll-mt-28" data-section id="projects">
@@ -279,7 +299,7 @@
 						Selected case studies first, followed by the broader project archive.
 					</p>
 				</header>
-				<Projects projects={portfolio.projects} />
+				<Projects mode={renderMode} projects={portfolio.projects} />
 			</section>
 
 			<section class="folio-sheet scroll-mt-28" data-section id="skills">
@@ -290,11 +310,11 @@
 						The stack I rely on when shipping production-grade product work.
 					</p>
 				</header>
-				<Skills skills={portfolio.skills} />
+				<Skills mode={renderMode} skills={portfolio.skills} />
 			</section>
 
 			<section class="scroll-mt-28" data-section id="contact">
-				<ContactCTA contact={portfolio.contact} />
+				<ContactCTA contact={portfolio.contact} mode={renderMode} />
 			</section>
 		</main>
 
@@ -312,6 +332,6 @@
 			<a class="dock-link dock-link-secondary" href={portfolio.hero.secondaryCta.href}>Resume</a>
 		</nav>
 
-		<Footer year={currentYear} name={portfolio.brand.name} />
+		<Footer mode={renderMode} year={currentYear} name={portfolio.brand.name} />
 	</div>
 {/if}

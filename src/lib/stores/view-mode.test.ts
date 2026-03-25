@@ -113,6 +113,7 @@ describe('view mode store', () => {
 		expect(get(module.viewMode)).toBe('focused');
 		expect(get(module.isViewTransitioning)).toBe(false);
 		expect(dataset.view).toBe('focused');
+		expect(dataset.viewReady).toBe('true');
 		expect(storage.read()).toBe('focused');
 	});
 
@@ -125,6 +126,21 @@ describe('view mode store', () => {
 
 		expect(get(module.viewMode)).toBe('expressive');
 		expect(dataset.view).toBe('expressive');
+		expect(dataset.viewReady).toBe('true');
+		expect(storage.read()).toBe('expressive');
+	});
+
+	it('prefers the bootstrapped root dataset over stale storage', async () => {
+		const { dataset, module, storage } = await loadViewModeModule({
+			rootMode: 'expressive',
+			storage: { initialMode: 'focused' }
+		});
+
+		module.initializeViewMode();
+
+		expect(get(module.viewMode)).toBe('expressive');
+		expect(dataset.view).toBe('expressive');
+		expect(dataset.viewReady).toBe('true');
 		expect(storage.read()).toBe('expressive');
 	});
 

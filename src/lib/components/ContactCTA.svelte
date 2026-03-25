@@ -1,9 +1,11 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import type { ContactData } from '$lib/types/portfolio';
-	import { viewMode } from '$lib/stores/view-mode';
+	import { viewMode, type ViewMode } from '$lib/stores/view-mode';
 
-	let { contact } = $props<{ contact: ContactData }>();
+	let { contact, mode = 'focused' } = $props<{ contact: ContactData; mode?: ViewMode }>();
 	let toastVisible = $state(false);
+	const renderMode = $derived(browser ? $viewMode : mode);
 
 	async function copyEmail() {
 		try {
@@ -18,7 +20,7 @@
 	}
 </script>
 
-{#if $viewMode === 'focused'}
+{#if renderMode === 'focused'}
 	<article class="hand-card hand-tilt-b relative p-6 sm:p-8">
 		<h3 class="text-3xl font-black tracking-[-0.02em] text-(--text)">{contact.headline}</h3>
 		<p class="mt-3 text-sm text-(--muted)">{contact.availabilityNote}</p>

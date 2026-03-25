@@ -1,11 +1,13 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import type { ExperienceItem } from '$lib/types/portfolio';
-	import { viewMode } from '$lib/stores/view-mode';
+	import { viewMode, type ViewMode } from '$lib/stores/view-mode';
 
-	let { experience } = $props<{ experience: ExperienceItem[] }>();
+	let { experience, mode = 'focused' } = $props<{ experience: ExperienceItem[]; mode?: ViewMode }>();
+	const renderMode = $derived(browser ? $viewMode : mode);
 </script>
 
-{#if $viewMode === 'focused'}
+{#if renderMode === 'focused'}
 	<div class="relative space-y-6 pl-5 before:absolute before:bottom-0 before:left-1 before:top-1 before:w-px before:bg-[linear-gradient(180deg,var(--accent),transparent)]">
 		{#each experience as item, index (item.company)}
 			<article

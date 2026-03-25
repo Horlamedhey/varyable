@@ -367,6 +367,6 @@ export const portfolio: PortfolioData = {
       "Portfolio of Abdulgafar Ajao showcasing production-grade frontend engineering, measurable business outcomes, and selected project case studies.",
     siteName: "VaryAble",
     siteUrl: "https://varyable.dev/",
-    image: "https://varyable.dev/og-image.svg",
+    image: "https://varyable.dev/og-image.png",
   },
 };

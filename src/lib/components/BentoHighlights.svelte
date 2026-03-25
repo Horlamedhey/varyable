@@ -1,11 +1,13 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import type { HighlightsData } from '$lib/types/portfolio';
-	import { viewMode } from '$lib/stores/view-mode';
+	import { viewMode, type ViewMode } from '$lib/stores/view-mode';
 
-	let { highlights } = $props<{ highlights: HighlightsData }>();
+	let { highlights, mode = 'focused' } = $props<{ highlights: HighlightsData; mode?: ViewMode }>();
+	const renderMode = $derived(browser ? $viewMode : mode);
 </script>
 
-{#if $viewMode === 'focused'}
+{#if renderMode === 'focused'}
 	<div class="grid gap-4 md:grid-cols-6">
 		<article class="hand-card hand-tilt-b p-5 sm:p-6 md:col-span-4">
 			<h2 class="text-2xl font-extrabold text-(--text)">Impact Metrics</h2>

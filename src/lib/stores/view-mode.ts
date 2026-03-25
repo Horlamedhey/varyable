@@ -8,7 +8,20 @@ export const VIEW_MODE_TRANSITION_MS = 420;
 
 const DEFAULT_VIEW_MODE: ViewMode = 'focused';
 
-export const viewMode = writable<ViewMode>(DEFAULT_VIEW_MODE);
+function readRootMode(): ViewMode | null {
+	if (!browser) {
+		return null;
+	}
+
+	const rootMode = document.documentElement.dataset.view;
+	return isViewMode(rootMode) ? rootMode : null;
+}
+
+function resolveInitialViewMode(): ViewMode {
+	return readRootMode() ?? readStoredMode() ?? DEFAULT_VIEW_MODE;
+}
+
+export const viewMode = writable<ViewMode>(resolveInitialViewMode());
 export const isViewTransitioning = writable(false);
 
 let initialized = false;
@@ -44,6 +57,12 @@ function persistMode(mode: ViewMode): void {
 		window.localStorage.setItem(VIEW_MODE_STORAGE_KEY, mode);
 	} catch {
 		// Ignore storage failures and keep the in-memory store authoritative.
+	}
+
+	try {
+		document.cookie = `${VIEW_MODE_STORAGE_KEY}=${mode}; Path=/; Max-Age=31536000; SameSite=Lax`;
+	} catch {
+		// Ignore cookie failures and keep the in-memory store authoritative.
 	}
 }
 
@@ -100,13 +119,13 @@ export function initializeViewMode(): void {
 
 	initialized = true;
 
-	const rootMode = document.documentElement.dataset.view;
-	const initialMode = isViewMode(rootMode) ? rootMode : readStoredMode() ?? DEFAULT_VIEW_MODE;
+	const initialMode = readRootMode() ?? readStoredMode() ?? get(viewMode);
 
 	viewMode.set(initialMode);
 	isViewTransitioning.set(false);
 	persistMode(initialMode);
 	syncDocument(initialMode, false);
+	document.documentElement.dataset.viewReady = 'true';
 }
 
 export function setViewMode(nextMode: ViewMode): void {

@@ -1,24 +1,27 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import type { BrandData, NavSection } from '$lib/types/portfolio';
 	import { onMount } from 'svelte';
 	import ViewModeSwitch from '$lib/components/ViewModeSwitch.svelte';
-	import { viewMode } from '$lib/stores/view-mode';
+	import { viewMode, type ViewMode } from '$lib/stores/view-mode';
 
-	let { brand, sections, activeSection, onSectionSelect } = $props<{
+	let { brand, sections, activeSection, onSectionSelect, mode = 'focused' } = $props<{
 		brand: BrandData;
 		sections: NavSection[];
 		activeSection: string;
 		onSectionSelect?: (sectionId: string) => void;
+		mode?: ViewMode;
 	}>();
 
 	let isScrolled = $state(false);
+	const renderMode = $derived(browser ? $viewMode : mode);
 	const activeLabel = $derived(
 		sections.find((section: NavSection) => section.id === activeSection)?.label ?? 'Home'
 	);
 
 	onMount(() => {
 		const handleScroll = () => {
-			isScrolled = window.scrollY > ($viewMode === 'focused' ? 48 : 32);
+			isScrolled = window.scrollY > (renderMode === 'focused' ? 48 : 32);
 		};
 
 		handleScroll();
@@ -30,7 +33,7 @@
 	});
 </script>
 
-{#if $viewMode === 'focused'}
+{#if renderMode === 'focused'}
 	<header class={`fixed inset-x-0 top-0 z-50 ${isScrolled ? 'backdrop-blur-sm' : ''}`}>
 		<div class="relative mx-auto max-w-6xl px-4 pt-3 sm:px-6 lg:px-8">
 			<div
@@ -59,7 +62,7 @@
 			</div>
 
 			<div class="absolute right-4 top-full mt-2 sm:right-6 lg:right-8">
-				<ViewModeSwitch />
+				<ViewModeSwitch mode={renderMode} />
 			</div>
 		</div>
 	</header>
@@ -78,7 +81,7 @@
 			<a class="utility-pill utility-link utility-pill-context" href="#contact">Open</a>
 			<a class="utility-pill utility-link utility-pill-context" href="/resume.pdf">CV</a>
 			<div class="utility-mode-row">
-				<ViewModeSwitch />
+				<ViewModeSwitch mode={renderMode} />
 			</div>
 		</div>
 	</header>

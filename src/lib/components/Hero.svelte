@@ -1,6 +1,7 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import type { HeroData } from '$lib/types/portfolio';
-	import { viewMode } from '$lib/stores/view-mode';
+	import { viewMode, type ViewMode } from '$lib/stores/view-mode';
 
 	interface SocialLink {
 		label: string;
@@ -8,7 +9,13 @@
 		iconPath: string;
 	}
 
-	let { hero, name, tag } = $props<{ hero: HeroData; name: string; tag: string }>();
+	let { hero, name, tag, mode = 'focused' } = $props<{
+		hero: HeroData;
+		name: string;
+		tag: string;
+		mode?: ViewMode;
+	}>();
+	const renderMode = $derived(browser ? $viewMode : mode);
 
 	const socialLinks = $derived.by(
 		(): SocialLink[] => [
@@ -34,7 +41,7 @@
 	);
 </script>
 
-{#if $viewMode === 'focused'}
+{#if renderMode === 'focused'}
 	<div class="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
 		<div class="space-y-6">
 			<h1 class="text-4xl font-black tracking-[-0.03em] text-(--text) sm:text-5xl lg:text-6xl">{name}</h1>

@@ -5,7 +5,7 @@ import { portfolio } from '$lib/content/portfolio';
 
 describe('portfolio page', () => {
 	it('renders hero and key sections', () => {
-		const { body } = render(Page, { props: { data: { portfolio } } });
+		const { body, head } = render(Page, { props: { data: { portfolio, initialViewMode: 'focused' } } });
 
 		expect(body).toContain('Senior Frontend &amp; Full-Stack Engineer');
 		expect(body).toContain('Focused');
@@ -13,5 +13,15 @@ describe('portfolio page', () => {
 		expect(body).toContain('Bento Highlights');
 		expect(body).toContain('Projects');
 		expect(body).toContain('Skills');
+		expect(head).toContain('property="og:image"');
+		expect(head).toContain('content="https://varyable.dev/og-image.png"');
+		expect(head).toContain('name="twitter:image"');
+	});
+
+	it('renders the expressive branch when the request mode is expressive', () => {
+		const { body } = render(Page, { props: { data: { portfolio, initialViewMode: 'expressive' } } });
+
+		expect(body).toContain('Section navigation');
+		expect(body).not.toContain('Primary navigation');
 	});
 });

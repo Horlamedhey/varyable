@@ -1,10 +1,12 @@
 <script lang="ts">
-	import { viewMode } from '$lib/stores/view-mode';
+	import { browser } from '$app/environment';
+	import { viewMode, type ViewMode } from '$lib/stores/view-mode';
 
-	let { year, name } = $props<{ year: number; name: string }>();
+	let { year, name, mode = 'focused' } = $props<{ year: number; name: string; mode?: ViewMode }>();
+	const renderMode = $derived(browser ? $viewMode : mode);
 </script>
 
-{#if $viewMode === 'focused'}
+{#if renderMode === 'focused'}
 	<footer class="mx-auto mt-16 max-w-6xl border-t border-(--border) px-4 pb-8 pt-6 text-xs text-(--muted) sm:px-6 lg:px-8">
 		<div class="flex flex-wrap items-center justify-between gap-2">
 			<p>© {year} {name} ‹VaryAble/›. Built with SvelteKit + Tailwind CSS.</p>
