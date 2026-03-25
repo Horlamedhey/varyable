@@ -38,12 +38,23 @@
 		<div class="relative mx-auto max-w-6xl px-4 pt-3 sm:px-6 lg:px-8">
 			<div
 				class={`nav-shell-subtle flex items-center justify-between gap-4 px-4 py-3 sm:px-5 ${isScrolled ? 'nav-shell-visible' : ''}`}
+				data-flip-absolute
+				data-flip-id="header-shell"
 			>
-				<a href="#hero" class="group inline-flex flex-col leading-tight">
+				<a
+					class="group inline-flex flex-col leading-tight"
+					data-flip-id="brand-lockup"
+					href="#hero"
+				>
 					<span class="annotation text-2xl text-(--accent) sm:text-3xl">{brand.tag}</span>
 				</a>
 
-				<nav class="hidden items-center gap-2 md:flex" aria-label="Primary navigation">
+				<nav
+					aria-label="Primary navigation"
+					class="hidden items-center gap-2 md:flex"
+					data-flip-absolute
+					data-flip-id="focused-nav-links"
+				>
 					{#each sections as section (section.id)}
 							<a
 								href={`#${section.id}`}
@@ -67,8 +78,12 @@
 		</div>
 	</header>
 {:else}
-	<header class={`nav-shell-subtle ${isScrolled ? 'nav-shell-visible' : ''}`}>
-		<div class="brand-lockup">
+	<header
+		class={`nav-shell-subtle ${isScrolled ? 'nav-shell-visible' : ''}`}
+		data-flip-absolute
+		data-flip-id="header-shell"
+	>
+		<div class="brand-lockup" data-flip-id="brand-lockup">
 			<a href="#hero" class="brand-mark">
 				<span class="brand-name">{brand.name}</span>
 				<span class="brand-tag">{brand.tag}</span>
@@ -76,7 +91,7 @@
 			<p class="brand-role">{brand.role}</p>
 		</div>
 
-		<div class="utility-cluster" aria-label="Portfolio status">
+		<div class="utility-cluster" aria-label="Portfolio status" data-flip-id="expressive-utility">
 			<span class="utility-pill utility-pill-context">Now: {activeLabel}</span>
 			<a class="utility-pill utility-link utility-pill-context" href="#contact">Open</a>
 			<a class="utility-pill utility-link utility-pill-context" href="/resume.pdf">CV</a>

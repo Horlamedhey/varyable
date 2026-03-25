@@ -21,11 +21,13 @@
 </script>
 
 {#if renderMode === 'focused'}
-	<article class="hand-card hand-tilt-b relative p-6 sm:p-8">
-		<h3 class="text-3xl font-black tracking-[-0.02em] text-(--text)">{contact.headline}</h3>
-		<p class="mt-3 text-sm text-(--muted)">{contact.availabilityNote}</p>
+	<article class="hand-card hand-tilt-b relative p-6 sm:p-8" data-flip-absolute data-flip-id="contact-shell">
+		<div data-flip-id="contact-copy">
+			<h3 class="text-3xl font-black tracking-[-0.02em] text-(--text)">{contact.headline}</h3>
+			<p class="mt-3 text-sm text-(--muted)">{contact.availabilityNote}</p>
+		</div>
 
-		<div class="mt-6 flex flex-wrap gap-3">
+		<div class="mt-6 flex flex-wrap gap-3" data-flip-id="contact-actions">
 			<button class="btn-primary" onclick={copyEmail} type="button">Copy Email</button>
 			<a class="btn-secondary" href={`mailto:${contact.email}`}>Send Email</a>
 			<a class="btn-secondary" href={contact.links.linkedin} rel="noreferrer" target="_blank">LinkedIn</a>
@@ -43,19 +45,19 @@
 		{/if}
 	</article>
 {:else}
-	<article class="hand-card hand-tilt-b contact-sheet">
+	<article class="hand-card hand-tilt-b contact-sheet" data-flip-absolute data-flip-id="contact-shell">
 		<div class="contact-grid">
-			<div>
+			<div data-flip-id="contact-copy">
 				<p class="section-kicker">Available for sharp product work</p>
 				<h3 class="contact-headline">{contact.headline}</h3>
 				<p class="contact-note">{contact.availabilityNote}</p>
 			</div>
 
-			<div class="contact-email-panel">
+			<div class="contact-email-panel" data-flip-absolute data-flip-id="contact-email-panel">
 				<p class="profile-stack-title">Reach out</p>
 				<a class="contact-email" href={`mailto:${contact.email}`}>{contact.email}</a>
 
-				<div class="contact-actions">
+				<div class="contact-actions" data-flip-id="contact-actions">
 					<button class="btn-primary" onclick={copyEmail} type="button">Copy Email</button>
 					<a class="btn-secondary" href={`mailto:${contact.email}`}>Send Email</a>
 					<a class="btn-secondary" href={contact.links.linkedin} rel="noreferrer" target="_blank">LinkedIn</a>

@@ -4,7 +4,6 @@ import { get, writable } from 'svelte/store';
 export type ViewMode = 'focused' | 'expressive';
 
 export const VIEW_MODE_STORAGE_KEY = 'portfolio-view-mode';
-export const VIEW_MODE_TRANSITION_MS = 420;
 
 const DEFAULT_VIEW_MODE: ViewMode = 'focused';
 
@@ -25,11 +24,6 @@ export const viewMode = writable<ViewMode>(resolveInitialViewMode());
 export const isViewTransitioning = writable(false);
 
 let initialized = false;
-let transitionTimer: ReturnType<typeof setTimeout> | undefined;
-
-type ViewTransitionDocument = Document & {
-	startViewTransition?: (callback: () => void) => { finished: Promise<void> };
-};
 
 function isViewMode(value: string | null | undefined): value is ViewMode {
 	return value === 'focused' || value === 'expressive';
@@ -82,34 +76,12 @@ function syncDocument(mode: ViewMode, transitioning: boolean): void {
 	delete dataset.viewTransitioning;
 }
 
-function clearTransitionTimer(): void {
-	if (transitionTimer !== undefined) {
-		clearTimeout(transitionTimer);
-		transitionTimer = undefined;
-	}
-}
-
-function applyViewMode(nextMode: ViewMode): void {
-	clearTransitionTimer();
-
-	viewMode.set(nextMode);
-	isViewTransitioning.set(true);
-	persistMode(nextMode);
-	syncDocument(nextMode, true);
-
-	transitionTimer = window.setTimeout(() => {
-		isViewTransitioning.set(false);
-		syncDocument(get(viewMode), false);
-		clearTransitionTimer();
-	}, VIEW_MODE_TRANSITION_MS);
-}
-
-function shouldUseViewTransition(): boolean {
+export function prefersReducedMotion(): boolean {
 	if (!browser || typeof window.matchMedia !== 'function') {
 		return false;
 	}
 
-	return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
 export function initializeViewMode(): void {
@@ -128,28 +100,29 @@ export function initializeViewMode(): void {
 	document.documentElement.dataset.viewReady = 'true';
 }
 
-export function setViewMode(nextMode: ViewMode): void {
+export function getViewMode(): ViewMode {
+	return get(viewMode);
+}
+
+export function setViewTransitioning(transitioning: boolean): void {
+	if (!browser) {
+		isViewTransitioning.set(transitioning);
+		return;
+	}
+
+	initializeViewMode();
+	isViewTransitioning.set(transitioning);
+	syncDocument(get(viewMode), transitioning);
+}
+
+export function commitViewMode(nextMode: ViewMode): void {
 	if (!browser) {
 		viewMode.set(nextMode);
 		return;
 	}
 
 	initializeViewMode();
-
-	const currentMode = get(viewMode);
-	if (currentMode === nextMode) {
-		persistMode(nextMode);
-		syncDocument(nextMode, false);
-		return;
-	}
-
-	const transitionDocument = document as ViewTransitionDocument;
-	if (typeof transitionDocument.startViewTransition === 'function' && shouldUseViewTransition()) {
-		transitionDocument.startViewTransition(() => {
-			applyViewMode(nextMode);
-		});
-		return;
-	}
-
-	applyViewMode(nextMode);
+	viewMode.set(nextMode);
+	persistMode(nextMode);
+	syncDocument(nextMode, get(isViewTransitioning));
 }

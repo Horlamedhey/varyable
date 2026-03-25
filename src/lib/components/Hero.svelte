@@ -42,16 +42,16 @@
 </script>
 
 {#if renderMode === 'focused'}
-	<div class="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
-		<div class="space-y-6">
-			<h1 class="text-4xl font-black tracking-[-0.03em] text-(--text) sm:text-5xl lg:text-6xl">{name}</h1>
+	<div class="grid gap-8 lg:grid-cols-[1.15fr_0.85fr] lg:items-end" data-flip-absolute data-flip-id="hero-shell">
+		<div class="space-y-6" data-flip-absolute data-flip-id="hero-copy">
+			<h1 class="text-4xl font-black tracking-[-0.03em] text-(--text) sm:text-5xl lg:text-6xl" data-flip-id="hero-name-block">{name}</h1>
 			<p class="annotation text-2xl text-(--accent)">{hero.title}</p>
-			<p class="max-w-2xl text-lg text-(--muted)">{hero.subtitle}</p>
-			<div class="flex flex-wrap items-center gap-3">
+			<p class="max-w-2xl text-lg text-(--muted)" data-flip-id="hero-summary">{hero.subtitle}</p>
+			<div class="flex flex-wrap items-center gap-3" data-flip-id="hero-actions">
 				<a class="btn-primary" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
 				<a class="btn-secondary" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
 			</div>
-			<div class="flex flex-wrap items-center gap-2">
+			<div class="flex flex-wrap items-center gap-2" data-flip-id="hero-socials">
 				{#each socialLinks as link (link.label)}
 					<a
 						class="social-link-subtle inline-flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-semibold text-(--text) hover:text-(--accent)"
@@ -68,17 +68,17 @@
 			</div>
 		</div>
 
-		<aside class="hand-card hand-tilt-a relative overflow-hidden p-6 sm:p-8">
+		<aside class="hand-card hand-tilt-a relative overflow-hidden p-6 sm:p-8" data-flip-id="hero-card">
 			<div class="absolute -right-16 -top-16 h-44 w-44 rounded-full bg-(--accent)/20 blur-3xl" aria-hidden="true"></div>
 			<div class="absolute -bottom-10 -left-12 h-36 w-36 rounded-full bg-(--accent-2)/20 blur-3xl" aria-hidden="true"></div>
 			<div class="relative space-y-4">
 				<h2 class="text-xl font-extrabold text-(--text)">Identity Card</h2>
 				<ul class="space-y-3 text-sm text-(--muted)">
-					<li><span class="font-semibold text-(--text)">Location:</span> {hero.location}</li>
-					<li><span class="font-semibold text-(--text)">Experience:</span> {hero.yearsExperience}</li>
-					<li><span class="font-semibold text-(--text)">Availability:</span> {hero.availability}</li>
+					<li data-flip-id="hero-meta-location"><span class="font-semibold text-(--text)">Location:</span> {hero.location}</li>
+					<li data-flip-id="hero-meta-experience"><span class="font-semibold text-(--text)">Experience:</span> {hero.yearsExperience}</li>
+					<li data-flip-id="hero-meta-availability"><span class="font-semibold text-(--text)">Availability:</span> {hero.availability}</li>
 				</ul>
-				<div class="mt-4 flex flex-wrap gap-2">
+				<div class="mt-4 flex flex-wrap gap-2" data-flip-id="hero-stack">
 					{#each hero.stack as skill (skill)}
 						<span class="accent-chip">{skill}</span>
 					{/each}
@@ -87,16 +87,16 @@
 		</aside>
 	</div>
 {:else}
-	<div class="hero-grid">
-		<div class="hero-copy">
+	<div class="hero-grid" data-flip-absolute data-flip-id="hero-shell">
+		<div class="hero-copy" data-flip-absolute data-flip-id="hero-copy">
 			<p class="section-kicker hero-kicker">Built for trust, speed, and strong DX</p>
-			<h1 class="hero-headline">{hero.title}</h1>
-			<p class="hero-summary">{hero.subtitle}</p>
-			<div class="hero-actions">
+			<h1 class="hero-headline" data-flip-id="hero-title-block">{hero.title}</h1>
+			<p class="hero-summary" data-flip-id="hero-summary">{hero.subtitle}</p>
+			<div class="hero-actions" data-flip-id="hero-actions">
 				<a class="btn-primary" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
 				<a class="btn-secondary" href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
 			</div>
-			<div class="hero-socials">
+			<div class="hero-socials" data-flip-id="hero-socials">
 				{#each socialLinks as link (link.label)}
 					<a class="hero-social-link" href={link.href} rel="noreferrer" target="_blank">
 						<svg
@@ -113,7 +113,7 @@
 			</div>
 		</div>
 
-		<aside class="hand-card hand-tilt-b profile-card">
+		<aside class="hand-card hand-tilt-b profile-card" data-flip-id="hero-card">
 			<div class="profile-header">
 				<div>
 					<p class="profile-name">{name}</p>
@@ -123,15 +123,15 @@
 			</div>
 
 			<ul class="profile-list">
-				<li>
+				<li data-flip-id="hero-meta-location">
 					<span class="profile-key">Base</span>
 					<span>{hero.location}</span>
 				</li>
-				<li>
+				<li data-flip-id="hero-meta-experience">
 					<span class="profile-key">Depth</span>
 					<span>{hero.yearsExperience}</span>
 				</li>
-				<li>
+				<li data-flip-id="hero-meta-availability">
 					<span class="profile-key">Focus</span>
 					<span>{hero.availability}</span>
 				</li>
@@ -139,7 +139,7 @@
 
 			<div class="profile-stack">
 				<p class="profile-stack-title">Core stack</p>
-				<div class="profile-stack-list">
+				<div class="profile-stack-list" data-flip-id="hero-stack">
 					{#each hero.stack as skill (skill)}
 						<span class="profile-stack-row">{skill}</span>
 					{/each}

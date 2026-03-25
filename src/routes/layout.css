@@ -673,6 +673,14 @@ dd {
   color: #07111b;
 }
 
+.view-mode-control[aria-busy="true"] .view-mode-switch {
+  pointer-events: none;
+}
+
+.view-mode-option:disabled {
+  cursor: default;
+}
+
 .hand-card {
   position: relative;
   isolation: isolate;
@@ -1595,86 +1603,8 @@ dd {
   outline-offset: 3px;
 }
 
-.page-canvas,
-.board-body,
-html[data-view-ready="true"] .nav-shell-subtle,
-html[data-view-ready="true"] .utility-pill,
-html[data-view-ready="true"] .view-mode-switch,
-html[data-view-ready="true"] .view-mode-pill,
-html[data-view-ready="true"] .portfolio-board,
-html[data-view-ready="true"] .folio-sheet,
-html[data-view-ready="true"] .section-kicker,
-html[data-view-ready="true"] .section-title,
-html[data-view-ready="true"] .section-subtitle,
-html[data-view-ready="true"] .section-subhead,
-html[data-view-ready="true"] .hand-card,
-html[data-view-ready="true"] .accent-chip,
-html[data-view-ready="true"] .btn-primary,
-html[data-view-ready="true"] .btn-secondary,
-html[data-view-ready="true"] .project-link,
-html[data-view-ready="true"] .hero-grid,
-html[data-view-ready="true"] .hero-copy,
-html[data-view-ready="true"] .hero-headline,
-html[data-view-ready="true"] .hero-summary,
-html[data-view-ready="true"] .hero-actions,
-html[data-view-ready="true"] .hero-social-link,
-html[data-view-ready="true"] .profile-card,
-html[data-view-ready="true"] .profile-name,
-html[data-view-ready="true"] .profile-tag,
-html[data-view-ready="true"] .profile-list,
-html[data-view-ready="true"] .profile-stack,
-html[data-view-ready="true"] .highlights-stack,
-html[data-view-ready="true"] .metrics-row,
-html[data-view-ready="true"] .metric-card,
-html[data-view-ready="true"] .metric-value,
-html[data-view-ready="true"] .metric-label,
-html[data-view-ready="true"] .notes-grid,
-html[data-view-ready="true"] .note-panel,
-html[data-view-ready="true"] .panel-heading h3,
-html[data-view-ready="true"] .mini-note,
-html[data-view-ready="true"] .timeline-stack,
-html[data-view-ready="true"] .timeline-card,
-html[data-view-ready="true"] .timeline-marker,
-html[data-view-ready="true"] .timeline-company,
-html[data-view-ready="true"] .timeline-role,
-html[data-view-ready="true"] .projects-stack,
-html[data-view-ready="true"] .featured-grid,
-html[data-view-ready="true"] .project-catalog,
-html[data-view-ready="true"] .project-sheet,
-html[data-view-ready="true"] .catalog-card,
-html[data-view-ready="true"] .project-name,
-html[data-view-ready="true"] .catalog-name,
-html[data-view-ready="true"] .project-blurb,
-html[data-view-ready="true"] .catalog-blurb,
-html[data-view-ready="true"] .skills-grid,
-html[data-view-ready="true"] .skill-card,
-html[data-view-ready="true"] .skill-heading,
-html[data-view-ready="true"] .contact-sheet,
-html[data-view-ready="true"] .contact-grid,
-html[data-view-ready="true"] .contact-headline,
-html[data-view-ready="true"] .contact-email-panel,
-html[data-view-ready="true"] .contact-note,
-html[data-view-ready="true"] .section-dock,
-html[data-view-ready="true"] .dock-link,
-html[data-view-ready="true"] .site-footer-inner,
-html[data-view-ready="true"] .wave-divider-svg,
-html[data-view-ready="true"] .wave-divider-glow,
-html[data-view-ready="true"] .wave-divider-line {
-  transition:
-    gap 220ms ease,
-    padding 220ms ease,
-    margin 220ms ease,
-    max-width 220ms ease,
-    font-size 220ms ease,
-    line-height 220ms ease,
-    letter-spacing 220ms ease,
-    border-radius 220ms ease,
-    border-color 220ms ease,
-    box-shadow 220ms ease,
-    background 220ms ease,
-    opacity 220ms ease,
-    transform 220ms ease,
-    filter 220ms ease;
+html[data-view-transitioning="true"] [data-flip-id] {
+  transition: none !important;
 }
 
 html[data-view="focused"] {
@@ -2367,21 +2297,6 @@ html[data-view="focused"] .site-footer-inner {
   font-size: 0.78rem;
 }
 
-html[data-view-transitioning="true"] .hero-grid {
-  transition-delay: 40ms;
-}
-
-html[data-view-transitioning="true"] .highlights-stack,
-html[data-view-transitioning="true"] .contact-grid {
-  transition-delay: 80ms;
-}
-
-html[data-view-transitioning="true"] .timeline-stack,
-html[data-view-transitioning="true"] .projects-stack,
-html[data-view-transitioning="true"] .skills-grid {
-  transition-delay: 110ms;
-}
-
 @media (min-width: 720px) {
   .metrics-row {
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -2493,59 +2408,5 @@ html[data-view-transitioning="true"] .skills-grid {
   .project-link,
   .dock-link {
     transition: none;
-  }
-}
-
-@supports (view-transition-name: none) {
-  .nav-shell-subtle {
-    view-transition-name: header-stage;
-  }
-
-  .hero-grid {
-    view-transition-name: hero-stage;
-  }
-
-  #highlights {
-    view-transition-name: highlights-stage;
-  }
-
-  #experience {
-    view-transition-name: experience-stage;
-  }
-
-  #projects {
-    view-transition-name: projects-stage;
-  }
-
-  #skills {
-    view-transition-name: skills-stage;
-  }
-
-  #contact {
-    view-transition-name: contact-stage;
-  }
-
-  ::view-transition-old(root),
-  ::view-transition-new(root) {
-    animation-duration: 260ms;
-    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  ::view-transition-old(header-stage),
-  ::view-transition-new(header-stage),
-  ::view-transition-old(hero-stage),
-  ::view-transition-new(hero-stage),
-  ::view-transition-old(highlights-stage),
-  ::view-transition-new(highlights-stage),
-  ::view-transition-old(experience-stage),
-  ::view-transition-new(experience-stage),
-  ::view-transition-old(projects-stage),
-  ::view-transition-new(projects-stage),
-  ::view-transition-old(skills-stage),
-  ::view-transition-new(skills-stage),
-  ::view-transition-old(contact-stage),
-  ::view-transition-new(contact-stage) {
-    animation-duration: 320ms;
-    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
   }
 }

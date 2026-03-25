@@ -1,4 +1,4 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import { get } from 'svelte/store';
 import type { Writable } from 'svelte/store';
 import type { ViewMode } from './view-mode';
@@ -6,11 +6,13 @@ import type { ViewMode } from './view-mode';
 vi.mock('$app/environment', () => ({ browser: true }));
 
 interface ViewModeModule {
-	VIEW_MODE_TRANSITION_MS: number;
 	viewMode: Writable<ViewMode>;
 	isViewTransitioning: Writable<boolean>;
+	commitViewMode(nextMode: ViewMode): void;
+	getViewMode(): ViewMode;
 	initializeViewMode(): void;
-	setViewMode(nextMode: ViewMode): void;
+	prefersReducedMotion(): boolean;
+	setViewTransitioning(transitioning: boolean): void;
 }
 
 interface StorageOptions {
@@ -37,18 +39,6 @@ function createStorage(options: StorageOptions = {}) {
 
 			storedMode = value;
 		},
-		removeItem() {
-			storedMode = null;
-		},
-		clear() {
-			storedMode = null;
-		},
-		key() {
-			return null;
-		},
-		get length() {
-			return storedMode === null ? 0 : 1;
-		},
 		read() {
 			return storedMode;
 		}
@@ -59,12 +49,11 @@ async function loadViewModeModule(options: {
 	rootMode?: string;
 	storage?: StorageOptions;
 	reducedMotion?: boolean;
-	startViewTransition?: (callback: () => void) => { finished: Promise<void> };
 } = {}): Promise<{
-		dataset: Record<string, string>;
-		module: ViewModeModule;
-		storage: ReturnType<typeof createStorage>;
-	}> {
+	dataset: Record<string, string>;
+	module: ViewModeModule;
+	storage: ReturnType<typeof createStorage>;
+}> {
 	vi.resetModules();
 
 	const dataset: Record<string, string> = {};
@@ -75,17 +64,15 @@ async function loadViewModeModule(options: {
 	const storage = createStorage(options.storage);
 	Object.defineProperty(globalThis, 'document', {
 		value: {
-			documentElement: { dataset },
-			startViewTransition: options.startViewTransition
+			cookie: '',
+			documentElement: { dataset }
 		},
 		configurable: true
 	});
 	Object.defineProperty(globalThis, 'window', {
 		value: {
 			localStorage: storage,
-			matchMedia: vi.fn().mockReturnValue({ matches: options.reducedMotion ?? false }),
-			setTimeout: globalThis.setTimeout,
-			clearTimeout: globalThis.clearTimeout
+			matchMedia: vi.fn().mockReturnValue({ matches: options.reducedMotion ?? false })
 		},
 		configurable: true
 	});
@@ -94,12 +81,7 @@ async function loadViewModeModule(options: {
 	return { dataset, module, storage };
 }
 
-beforeEach(() => {
-	vi.useFakeTimers();
-});
-
 afterEach(() => {
-	vi.useRealTimers();
 	Reflect.deleteProperty(globalThis, 'document');
 	Reflect.deleteProperty(globalThis, 'window');
 });
@@ -144,56 +126,38 @@ describe('view mode store', () => {
 		expect(storage.read()).toBe('expressive');
 	});
 
-	it('syncs the root dataset during mode transitions', async () => {
+	it('commits mode changes without forcing a transition state', async () => {
 		const { dataset, module, storage } = await loadViewModeModule();
 
 		module.initializeViewMode();
-		module.setViewMode('expressive');
+		module.commitViewMode('expressive');
 
-		expect(get(module.viewMode)).toBe('expressive');
-		expect(get(module.isViewTransitioning)).toBe(true);
+		expect(module.getViewMode()).toBe('expressive');
+		expect(get(module.isViewTransitioning)).toBe(false);
 		expect(dataset.view).toBe('expressive');
+		expect(dataset.viewTransitioning).toBeUndefined();
+		expect(storage.read()).toBe('expressive');
+	});
+
+	it('syncs the transition flag onto the root dataset', async () => {
+		const { dataset, module } = await loadViewModeModule();
+
+		module.initializeViewMode();
+		module.setViewTransitioning(true);
+
+		expect(get(module.isViewTransitioning)).toBe(true);
 		expect(dataset.viewTransitioning).toBe('true');
-		expect(storage.read()).toBe('expressive');
 
-		vi.advanceTimersByTime(module.VIEW_MODE_TRANSITION_MS);
+		module.setViewTransitioning(false);
 
 		expect(get(module.isViewTransitioning)).toBe(false);
-		expect(dataset.view).toBe('expressive');
 		expect(dataset.viewTransitioning).toBeUndefined();
 	});
 
-	it('keeps the dataset stable when setting the current mode again', async () => {
-		const { dataset, module, storage } = await loadViewModeModule();
+	it('reflects the prefers-reduced-motion media query', async () => {
+		const { module } = await loadViewModeModule({ reducedMotion: true });
 
-		module.initializeViewMode();
-		module.setViewMode('focused');
-
-		expect(get(module.viewMode)).toBe('focused');
-		expect(get(module.isViewTransitioning)).toBe(false);
-		expect(dataset.view).toBe('focused');
-		expect(dataset.viewTransitioning).toBeUndefined();
-		expect(storage.read()).toBe('focused');
-	});
-
-	it('uses the browser view transition API when available', async () => {
-		const startViewTransition = vi.fn((callback: () => void) => {
-			callback();
-			return { finished: Promise.resolve() };
-		});
-
-		const { dataset, module, storage } = await loadViewModeModule({
-			startViewTransition
-		});
-
-		module.initializeViewMode();
-		module.setViewMode('expressive');
-
-		expect(startViewTransition).toHaveBeenCalledTimes(1);
-		expect(get(module.viewMode)).toBe('expressive');
-		expect(get(module.isViewTransitioning)).toBe(true);
-		expect(dataset.view).toBe('expressive');
-		expect(storage.read()).toBe('expressive');
+		expect(module.prefersReducedMotion()).toBe(true);
 	});
 
 	it('falls back safely when storage is unavailable', async () => {
@@ -202,7 +166,8 @@ describe('view mode store', () => {
 		});
 
 		module.initializeViewMode();
-		module.setViewMode('expressive');
+		module.commitViewMode('expressive');
+		module.setViewTransitioning(true);
 
 		expect(get(module.viewMode)).toBe('expressive');
 		expect(dataset.view).toBe('expressive');

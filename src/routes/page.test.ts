@@ -10,6 +10,9 @@ describe('portfolio page', () => {
 		expect(body).toContain('Senior Frontend &amp; Full-Stack Engineer');
 		expect(body).toContain('Focused');
 		expect(body).toContain('Expressive');
+		expect(body).toContain('data-flip-id="section-hero"');
+		expect(body).toContain('data-flip-id="hero-shell"');
+		expect(body).toContain('data-flip-id="mode-switch"');
 		expect(body).toContain('Bento Highlights');
 		expect(body).toContain('Projects');
 		expect(body).toContain('Skills');
@@ -23,5 +26,6 @@ describe('portfolio page', () => {
 
 		expect(body).toContain('Section navigation');
 		expect(body).not.toContain('Primary navigation');
+		expect(body).toContain('data-flip-id="section-dock"');
 	});
 });
