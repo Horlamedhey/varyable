@@ -187,7 +187,13 @@
 		></div>
 
 		<main class="mx-auto flex w-full max-w-6xl flex-col gap-16 px-4 pb-6 pt-28 sm:px-6 lg:px-8 lg:pt-32">
-			<section class="scroll-mt-28" data-section id="hero">
+			<section
+				class="scroll-mt-28"
+				data-flip-absolute
+				data-flip-id="section-hero"
+				data-section
+				id="hero"
+			>
 				<Hero
 					hero={portfolio.hero}
 					mode={renderMode}
@@ -198,8 +204,14 @@
 
 			<div aria-hidden="true" class="squiggle-separator"></div>
 
-			<section class="scroll-mt-28" data-section id="highlights">
-				<header class="mb-5">
+			<section
+				class="scroll-mt-28"
+				data-flip-absolute
+				data-flip-id="section-highlights"
+				data-section
+				id="highlights"
+			>
+				<header class="mb-5" data-flip-id="section-heading-highlights">
 					<p class="annotation text-2xl text-(--accent)">Scan me in seconds</p>
 					<h2 class="text-3xl font-black tracking-[-0.03em] text-(--text)">Bento Highlights</h2>
 				</header>
@@ -208,8 +220,14 @@
 
 			<div aria-hidden="true" class="squiggle-separator"></div>
 
-			<section class="scroll-mt-28" data-section id="experience">
-				<header class="mb-5">
+			<section
+				class="scroll-mt-28"
+				data-flip-absolute
+				data-flip-id="section-experience"
+				data-section
+				id="experience"
+			>
+				<header class="mb-5" data-flip-id="section-heading-experience">
 					<p class="annotation text-2xl text-(--accent)">Execution history</p>
 					<h2 class="text-3xl font-black tracking-[-0.03em] text-(--text)">Experience Timeline</h2>
 				</header>
@@ -218,8 +236,14 @@
 
 			<div aria-hidden="true" class="squiggle-separator"></div>
 
-			<section class="scroll-mt-28" data-section id="projects">
-				<header class="mb-5">
+			<section
+				class="scroll-mt-28"
+				data-flip-absolute
+				data-flip-id="section-projects"
+				data-section
+				id="projects"
+			>
+				<header class="mb-5" data-flip-id="section-heading-projects">
 					<p class="annotation text-2xl text-(--accent)">Outcomes and depth</p>
 					<h2 class="text-3xl font-black tracking-[-0.03em] text-(--text)">Projects</h2>
 				</header>
@@ -228,8 +252,14 @@
 
 			<div aria-hidden="true" class="squiggle-separator"></div>
 
-			<section class="scroll-mt-28" data-section id="skills">
-				<header class="mb-5">
+			<section
+				class="scroll-mt-28"
+				data-flip-absolute
+				data-flip-id="section-skills"
+				data-section
+				id="skills"
+			>
+				<header class="mb-5" data-flip-id="section-heading-skills">
 					<p class="annotation text-2xl text-(--accent)">Practical toolkit</p>
 					<h2 class="text-3xl font-black tracking-[-0.03em] text-(--text)">Skills</h2>
 				</header>
@@ -238,7 +268,13 @@
 
 			<div aria-hidden="true" class="squiggle-separator"></div>
 
-			<section class="scroll-mt-28" data-section id="contact">
+			<section
+				class="scroll-mt-28"
+				data-flip-absolute
+				data-flip-id="section-contact"
+				data-section
+				id="contact"
+			>
 				<ContactCTA contact={portfolio.contact} mode={renderMode} />
 			</section>
 		</main>
@@ -248,7 +284,11 @@
 {:else}
 	<div class="page-scene">
 		<main class="page-canvas">
-			<section class="portfolio-board scroll-mt-24" data-section id="hero">
+			<section
+				class="portfolio-board scroll-mt-24"
+				data-section
+				id="hero"
+			>
 				<Navbar
 					activeSection={activeSection}
 					brand={portfolio.brand}
@@ -267,8 +307,17 @@
 
 					<div aria-hidden="true" class="board-divider"></div>
 
-					<section class="scroll-mt-28" data-section id="highlights">
-						<header class="section-heading section-heading-inline">
+					<section
+						class="scroll-mt-28"
+						data-flip-absolute
+						data-flip-id="section-highlights"
+						data-section
+						id="highlights"
+					>
+						<header
+							class="section-heading section-heading-inline"
+							data-flip-id="section-heading-highlights"
+						>
 							<p class="section-kicker">Scan it in one glance</p>
 							<h2 class="section-title">Bento Highlights</h2>
 							<p class="section-subtitle">
@@ -280,8 +329,14 @@
 				</div>
 			</section>
 
-			<section class="folio-sheet scroll-mt-28" data-section id="experience">
-				<header class="section-heading">
+			<section
+				class="folio-sheet scroll-mt-28"
+				data-flip-absolute
+				data-flip-id="section-experience"
+				data-section
+				id="experience"
+			>
+				<header class="section-heading" data-flip-id="section-heading-experience">
 					<p class="section-kicker">Execution history</p>
 					<h2 class="section-title">Experience Timeline</h2>
 					<p class="section-subtitle">
@@ -291,8 +346,14 @@
 				<ExperienceTimeline experience={portfolio.experience} mode={renderMode} />
 			</section>
 
-			<section class="folio-sheet scroll-mt-28" data-section id="projects">
-				<header class="section-heading">
+			<section
+				class="folio-sheet scroll-mt-28"
+				data-flip-absolute
+				data-flip-id="section-projects"
+				data-section
+				id="projects"
+			>
+				<header class="section-heading" data-flip-id="section-heading-projects">
 					<p class="section-kicker">Outcomes and depth</p>
 					<h2 class="section-title">Projects</h2>
 					<p class="section-subtitle">
@@ -302,8 +363,14 @@
 				<Projects mode={renderMode} projects={portfolio.projects} />
 			</section>
 
-			<section class="folio-sheet scroll-mt-28" data-section id="skills">
-				<header class="section-heading">
+			<section
+				class="folio-sheet scroll-mt-28"
+				data-flip-absolute
+				data-flip-id="section-skills"
+				data-section
+				id="skills"
+			>
+				<header class="section-heading" data-flip-id="section-heading-skills">
 					<p class="section-kicker">Practical toolkit</p>
 					<h2 class="section-title">Skills</h2>
 					<p class="section-subtitle">
@@ -313,12 +380,23 @@
 				<Skills mode={renderMode} skills={portfolio.skills} />
 			</section>
 
-			<section class="scroll-mt-28" data-section id="contact">
+			<section
+				class="scroll-mt-28"
+				data-flip-absolute
+				data-flip-id="section-contact"
+				data-section
+				id="contact"
+			>
 				<ContactCTA contact={portfolio.contact} mode={renderMode} />
 			</section>
 		</main>
 
-		<nav aria-label="Section navigation" class="section-dock">
+		<nav
+			aria-label="Section navigation"
+			class="section-dock"
+			data-flip-absolute
+			data-flip-id="section-dock"
+		>
 			{#each navSections as section (section.id)}
 				<a
 					href={`#${section.id}`}

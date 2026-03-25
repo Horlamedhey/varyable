@@ -7,7 +7,7 @@ export default defineConfig({
     __SVELTEKIT_EXPERIMENTAL_USE_TRANSFORM_ERROR__: "false",
   },
   server: {
-    allowedHosts: ["ab8e-161-8-96-183.ngrok-free.app"],
+    allowedHosts: [],
   },
   plugins: [tailwindcss(), sveltekit()],
   test: {

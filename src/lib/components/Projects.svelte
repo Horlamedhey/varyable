@@ -53,14 +53,19 @@
 </script>
 
 {#if renderMode === 'focused'}
-	<div class="space-y-8">
+	<div class="space-y-8" data-flip-absolute data-flip-id="projects-shell">
 		<div>
 			<p class="annotation text-2xl text-(--accent)">Show your strongest work first</p>
 			<h3 class="mt-1 text-3xl font-black tracking-[-0.02em] text-(--text)">Featured Projects</h3>
 		</div>
 		<div class="grid gap-5 md:grid-cols-2">
 			{#each projects.featured as project, index (uniqueKey(project, `featured-${index}`))}
-				<article class="hand-card p-6" style={`--tilt:${index % 2 === 0 ? '-0.5deg' : '0.5deg'}`}>
+				<article
+					class="hand-card p-6"
+					data-flip-absolute
+					data-flip-id={`project-featured-${project.slug}`}
+					style={`--tilt:${index % 2 === 0 ? '-0.5deg' : '0.5deg'}`}
+				>
 					<h4 class="text-2xl font-extrabold text-(--text)">{project.name}</h4>
 					<p class="mt-2 text-sm text-(--muted)">{project.blurb}</p>
 					<dl class="mt-4 space-y-2 text-sm">
@@ -108,6 +113,8 @@
 				{#each visibleProjects as project, index (uniqueKey(project, `all-${index}`))}
 					<article
 						class="hand-card p-5 text-sm"
+						data-flip-absolute
+						data-flip-id={`project-catalog-${project.slug}`}
 						style={`--tilt:${index % 3 === 0 ? '-0.7deg' : index % 3 === 1 ? '0.6deg' : '-0.2deg'}`}
 					>
 						<h4 class="text-lg font-bold text-(--text)">{project.name}</h4>
@@ -132,14 +139,19 @@
 		</div>
 	</div>
 {:else}
-	<div class="projects-stack">
+	<div class="projects-stack" data-flip-absolute data-flip-id="projects-shell">
 		<div>
 			<p class="annotation text-2xl text-(--accent)">Show your strongest work first</p>
 			<h3 class="section-subhead">Featured Projects</h3>
 		</div>
 		<div class="featured-grid">
 			{#each projects.featured as project, index (uniqueKey(project, `featured-${index}`))}
-				<article class="hand-card project-sheet" style={`--tilt:${index % 2 === 0 ? '-0.55deg' : '0.55deg'}`}>
+				<article
+					class="hand-card project-sheet"
+					data-flip-absolute
+					data-flip-id={`project-featured-${project.slug}`}
+					style={`--tilt:${index % 2 === 0 ? '-0.55deg' : '0.55deg'}`}
+				>
 					<p class="project-kicker">Featured case</p>
 					<h4 class="project-name">{project.name}</h4>
 					<p class="project-blurb">{project.blurb}</p>
@@ -193,6 +205,8 @@
 				{#each visibleProjects as project, index (uniqueKey(project, `all-${index}`))}
 					<article
 						class="hand-card catalog-card"
+						data-flip-absolute
+						data-flip-id={`project-catalog-${project.slug}`}
 						style={`--tilt:${index % 3 === 0 ? '-0.7deg' : index % 3 === 1 ? '0.6deg' : '-0.2deg'}`}
 					>
 						<h4 class="catalog-name">{project.name}</h4>

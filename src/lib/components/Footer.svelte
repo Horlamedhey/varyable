@@ -7,15 +7,18 @@
 </script>
 
 {#if renderMode === 'focused'}
-	<footer class="mx-auto mt-16 max-w-6xl border-t border-(--border) px-4 pb-8 pt-6 text-xs text-(--muted) sm:px-6 lg:px-8">
-		<div class="flex flex-wrap items-center justify-between gap-2">
+	<footer
+		class="mx-auto mt-16 max-w-6xl border-t border-(--border) px-4 pb-8 pt-6 text-xs text-(--muted) sm:px-6 lg:px-8"
+		data-flip-id="site-footer"
+	>
+		<div class="flex flex-wrap items-center justify-between gap-2" data-flip-absolute data-flip-id="site-footer-inner">
 			<p>© {year} {name} ‹VaryAble/›. Built with SvelteKit + Tailwind CSS.</p>
 			<p>Production-minded frontend engineering.</p>
 		</div>
 	</footer>
 {:else}
-	<footer class="site-footer">
-		<div class="site-footer-inner">
+	<footer class="site-footer" data-flip-id="site-footer">
+		<div class="site-footer-inner" data-flip-absolute data-flip-id="site-footer-inner">
 			<p>© {year} {name} ‹VaryAble/›. Built with SvelteKit + Tailwind CSS.</p>
 			<p>Production-minded frontend engineering.</p>
 		</div>

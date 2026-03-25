@@ -2,6 +2,11 @@ import { expect, test } from '@playwright/test';
 
 test('portfolio smoke journey', async ({ page }) => {
 	await page.goto('/');
+	await page.evaluate(() => {
+		localStorage.setItem('portfolio-view-mode', 'focused');
+		document.cookie = 'portfolio-view-mode=focused; path=/';
+	});
+	await page.reload();
 
 	const focusedButton = page.getByRole('button', { name: 'Focused' });
 	const expressiveButton = page.getByRole('button', { name: 'Expressive' });
@@ -20,16 +25,26 @@ test('portfolio smoke journey', async ({ page }) => {
 	await expect(page.locator('#contact')).toHaveCount(1);
 	await expect(page.locator('#hero').getByRole('heading').first()).toBeVisible();
 	await expect(page.getByRole('link', { name: 'View Projects' })).toBeVisible();
-	await primaryNav.getByRole('link', { name: 'Projects', exact: true }).click();
+	await primaryNav.getByRole('link', { name: 'Projects', exact: true }).click({ noWaitAfter: true });
 	await expect(primaryNav.getByRole('link', { name: 'Projects', exact: true })).toHaveAttribute(
 		'aria-current',
 		'page'
 	);
-
-	await expressiveButton.click();
+	await expressiveButton.click({ noWaitAfter: true });
+	await expect(focusedButton).toBeDisabled();
+	await expect(expressiveButton).toBeDisabled();
+	await page.waitForFunction(() => {
+		const button = [...document.querySelectorAll('button')].find((node) => node.textContent?.trim() === 'Expressive');
+		return button instanceof HTMLButtonElement && !button.disabled;
+	});
 	await expect(expressiveButton).toHaveAttribute('aria-pressed', 'true');
 	const sectionNav = page.getByRole('navigation', { name: 'Section navigation' });
 	await expect(sectionNav).toBeVisible();
+	await expect(page).toHaveURL(/#projects$/);
+	await expect(sectionNav.getByRole('link', { name: 'Projects', exact: true })).toHaveAttribute(
+		'aria-current',
+		'page'
+	);
 
 	await page.reload();
 	await expect(expressiveButton).toHaveAttribute('aria-pressed', 'true');

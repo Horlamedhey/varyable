@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { isViewTransitioning, setViewMode, viewMode, type ViewMode } from '$lib/stores/view-mode';
+	import { transitionViewMode } from '$lib/animations/view-mode-morph';
+	import { isViewTransitioning, viewMode, type ViewMode } from '$lib/stores/view-mode';
 
 	let { mode = 'focused' } = $props<{ mode?: ViewMode }>();
 	const renderMode = $derived(browser ? $viewMode : mode);
@@ -11,7 +12,14 @@
 	];
 </script>
 
-<div class="view-mode-control" aria-label="View mode" role="group">
+<div
+	aria-busy={$isViewTransitioning}
+	aria-label="View mode"
+	class="view-mode-control"
+	data-flip-absolute
+	data-flip-id="mode-switch"
+	role="group"
+>
 	<span class="view-mode-label">View</span>
 	<div
 		class={`view-mode-switch ${renderMode === 'expressive' ? 'is-expressive' : ''} ${
@@ -25,7 +33,8 @@
 			<button
 				aria-pressed={renderMode === option.value}
 				class={`view-mode-option ${renderMode === option.value ? 'is-active' : ''}`}
-				onclick={() => setViewMode(option.value)}
+				disabled={$isViewTransitioning}
+				onclick={() => void transitionViewMode(option.value)}
 				type="button"
 			>
 				{option.label}

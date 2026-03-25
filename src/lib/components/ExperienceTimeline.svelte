@@ -8,10 +8,12 @@
 </script>
 
 {#if renderMode === 'focused'}
-	<div class="relative space-y-6 pl-5 before:absolute before:bottom-0 before:left-1 before:top-1 before:w-px before:bg-[linear-gradient(180deg,var(--accent),transparent)]">
+	<div class="relative space-y-6 pl-5 before:absolute before:bottom-0 before:left-1 before:top-1 before:w-px before:bg-[linear-gradient(180deg,var(--accent),transparent)]" data-flip-absolute data-flip-id="experience-shell">
 		{#each experience as item, index (item.company)}
 			<article
 				class="hand-card hand-tilt-b p-5 sm:p-6"
+				data-flip-absolute
+				data-flip-id={`experience-${item.company}`}
 				style={`--tilt:${index % 2 === 0 ? '-0.6deg' : '0.6deg'}`}
 			>
 				<div
@@ -33,9 +35,14 @@
 		{/each}
 	</div>
 {:else}
-	<div class="timeline-stack">
+	<div class="timeline-stack" data-flip-absolute data-flip-id="experience-shell">
 		{#each experience as item, index (item.company)}
-			<article class="hand-card timeline-card" style={`--tilt:${index % 2 === 0 ? '-0.6deg' : '0.65deg'}`}>
+			<article
+				class="hand-card timeline-card"
+				data-flip-absolute
+				data-flip-id={`experience-${item.company}`}
+				style={`--tilt:${index % 2 === 0 ? '-0.6deg' : '0.65deg'}`}
+			>
 				<span aria-hidden="true" class="timeline-marker"></span>
 				<p class="timeline-period">{item.period}</p>
 				<h3 class="timeline-company">{item.company}</h3>
