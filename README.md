@@ -1,8 +1,9 @@
 # VaryAble Portfolio
 
-Production-grade SvelteKit portfolio for AbdulGafar `</VaryAble>`.
+Production-grade SvelteKit portfolio for AbdulGafar `<VaryAble/>`.
 
 ## Stack
+
 - SvelteKit
 - Tailwind CSS v4 (`@tailwindcss/vite`)
 - TypeScript (strict)
@@ -12,6 +13,7 @@ Production-grade SvelteKit portfolio for AbdulGafar `</VaryAble>`.
 - Vercel adapter
 
 ## Commands
+
 - `npm run dev`
 - `npm run check`
 - `npm run lint`
@@ -20,4 +22,5 @@ Production-grade SvelteKit portfolio for AbdulGafar `</VaryAble>`.
 - `npm run build`
 
 ## Quality Gates
+
 The repository policy is defined in `/Users/varyable/Workspace/webdev/varyable/AGENTS.md` and enforced in CI.

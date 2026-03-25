@@ -9,6 +9,6 @@
   <circle cx="920" cy="140" r="180" fill="#2dd4bf" opacity="0.2"/>
   <circle cx="300" cy="520" r="220" fill="#4f7cff" opacity="0.2"/>
   <text x="90" y="280" fill="#f1f6fb" font-size="68" font-family="Space Grotesk, Manrope, sans-serif" font-weight="700">AbdulGafar</text>
-  <text x="90" y="350" fill="#2dd4bf" font-size="58" font-family="Caveat, cursive" font-weight="700">&lt;/VaryAble&gt;</text>
+  <text x="90" y="350" fill="#2dd4bf" font-size="58" font-family="Caveat, cursive" font-weight="700">&lt;VaryAble/&gt;</text>
   <text x="90" y="430" fill="#95a6be" font-size="36" font-family="Manrope, sans-serif">Senior Frontend &amp; Full-Stack Engineer</text>
 </svg>
