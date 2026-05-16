@@ -80,3 +80,10 @@
 - [x] Run `npm run check`, `npm run lint`, `npm run test`, `npm run build`, and `npm audit --audit-level=high`.
 - [x] Fix the expressive top-right clipping that appears during the morph near the header/nav edge.
 - [x] Fix the hidden expressive morph state and eliminate the second animation pass after FLIP completes.
+
+# Security Audit Fix Checklist
+
+- [x] Inspect the current npm audit report and identify vulnerable dependency paths.
+- [x] Apply the smallest npm-managed dependency update that clears high-severity advisories.
+- [x] Run `npm run check`, `npm run lint`, `npm run test`, `npm run build`, and `npm audit --audit-level=high`.
+- [x] Summarize changed dependency surface and any remaining risks.
