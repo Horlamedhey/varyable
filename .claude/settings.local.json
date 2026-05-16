@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git checkout:*)",
+      "Bash(xxd /Users/varyable/Workspace/webdev/varyable/src/lib/components/BentoHighlights.svelte)"
+    ]
+  }
+}

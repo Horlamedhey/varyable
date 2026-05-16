@@ -38,9 +38,9 @@ export const portfolio: PortfolioData = {
       href: "/resume.pdf",
     },
     profiles: {
-      github: "https://github.com",
-      linkedin: "https://www.linkedin.com",
-      stackoverflow: "https://stackoverflow.com",
+      github: "https://github.com/horlamedhey",
+      linkedin: "https://www.linkedin.com/in/gafar-ajao-21399215b/",
+      stackoverflow: "https://stackoverflow.com/users/10773017/abdulgafar-olamide-ajao",
     },
   },
   highlights: {
@@ -355,8 +355,8 @@ export const portfolio: PortfolioData = {
     email: "hello@varyable.dev",
     availabilityNote: "Typical response window: within 24 hours.",
     links: {
-      linkedin: "https://www.linkedin.com",
-      github: "https://github.com",
+      linkedin: "https://www.linkedin.com/in/gafar-ajao-21399215b/",
+      github: "https://github.com/horlamedhey",
       whatsapp: "",
       calendar: "",
     },
