@@ -357,7 +357,7 @@
 					<p class="section-kicker">Outcomes and depth</p>
 					<h2 class="section-title">Projects</h2>
 					<p class="section-subtitle">
-						Selected case studies first, followed by the broader project archive.
+						Selected projects first, followed by the broader project archive.
 					</p>
 				</header>
 				<Projects mode={renderMode} projects={portfolio.projects} />

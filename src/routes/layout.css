@@ -1340,6 +1340,81 @@ dd {
   font-size: 1.1rem;
 }
 
+.experience-overflow-grid {
+  display: grid;
+  gap: 1rem;
+  min-width: 0;
+}
+
+.experience-overflow-item {
+  position: relative;
+  min-width: 0;
+  transform-origin: top center;
+  transition:
+    filter 520ms ease,
+    opacity 520ms ease;
+  will-change: transform;
+}
+
+.experience-overflow-item .experience-marker {
+  z-index: 3;
+  opacity: 1;
+  transition: opacity 220ms ease;
+  transition-delay: calc(var(--stack-index) * 75ms);
+}
+
+.experience-overflow-collapsed {
+  gap: 0;
+  padding-bottom: calc((var(--stack-count) - 1) * 0.85rem);
+}
+
+.experience-overflow-collapsed .experience-overflow-item {
+  grid-area: 1 / 1;
+  z-index: var(--stack-order);
+  transform: translateY(calc(var(--stack-index) * 0.85rem));
+  filter: brightness(calc(1 - var(--stack-index) * 0.055));
+  pointer-events: none;
+}
+
+.experience-overflow-collapsed .experience-marker {
+  opacity: 0;
+  transition-delay: 0ms;
+}
+
+.experience-toggle-row {
+  display: flex;
+  justify-content: center;
+  padding-top: 0.5rem;
+}
+
+.experience-toggle {
+  gap: 0.7rem;
+}
+
+.experience-toggle:disabled {
+  cursor: wait;
+  opacity: 0.65;
+}
+
+.experience-toggle-arrow {
+  display: inline-block;
+  color: var(--accent);
+  font-size: 1.15em;
+  transition: transform 240ms ease;
+}
+
+.experience-toggle-arrow-up {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experience-overflow-item,
+  .experience-marker,
+  .experience-toggle-arrow {
+    transition: none;
+  }
+}
+
 .projects-stack {
   display: grid;
   gap: 1.8rem;

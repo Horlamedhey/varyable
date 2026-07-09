@@ -25,6 +25,31 @@ test('portfolio smoke journey', async ({ page }) => {
 	await expect(page.locator('#contact')).toHaveCount(1);
 	await expect(page.locator('#hero').getByRole('heading').first()).toBeVisible();
 	await expect(page.getByRole('link', { name: 'View Projects' })).toBeVisible();
+
+	const experienceSection = page.locator('#experience');
+	const experienceToggle = experienceSection.locator('.experience-toggle');
+	const additionalExperience = page.locator('#focused-additional-experience');
+	await expect(experienceToggle).toHaveAccessibleName('Show 5 more roles');
+	await expect(additionalExperience).toHaveClass(/experience-overflow-collapsed/);
+	await expect(additionalExperience).toHaveAttribute('aria-hidden', 'true');
+	await expect(experienceToggle).toHaveAttribute('aria-expanded', 'false');
+	await experienceToggle.click();
+	await expect(experienceToggle).toHaveAttribute('aria-expanded', 'true');
+	await expect(experienceToggle).toHaveAccessibleName('Show less experience');
+	await expect(additionalExperience).not.toHaveClass(/experience-overflow-collapsed/);
+	await expect(additionalExperience).toHaveAttribute('aria-hidden', 'false');
+	await expect(experienceSection.getByRole('heading', { name: 'Fluidangle LLC' })).toBeVisible();
+	await expect
+		.poll(() =>
+			additionalExperience.evaluate(
+				(element) => element.getAnimations({ subtree: true }).filter((animation) => animation.playState === 'running').length
+			)
+		)
+		.toBeGreaterThan(0);
+	await experienceToggle.click();
+	await expect(additionalExperience).toHaveClass(/experience-overflow-collapsed/);
+	await expect(additionalExperience).toHaveAttribute('aria-hidden', 'true');
+
 	await primaryNav.getByRole('link', { name: 'Projects', exact: true }).click({ noWaitAfter: true });
 	await expect(primaryNav.getByRole('link', { name: 'Projects', exact: true })).toHaveAttribute(
 		'aria-current',

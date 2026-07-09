@@ -38,7 +38,6 @@ export interface HighlightsData {
 	strengths: string[];
 	toolbox: string[];
 	componentSystem: string[];
-	now: string[];
 }
 
 export interface ExperienceItem {
@@ -51,16 +50,14 @@ export interface ExperienceItem {
 export interface ProjectLinks {
 	live: string;
 	repo: string;
-	caseStudy: string;
+	liveComingSoon?: boolean;
 }
 
 export interface ProjectItem {
 	slug: string;
 	name: string;
 	blurb: string;
-	problem: string;
-	approach: string;
-	result: string;
+	impact: string;
 	tech: string[];
 	links: ProjectLinks;
 }

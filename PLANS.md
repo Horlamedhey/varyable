@@ -87,3 +87,55 @@
 - [x] Apply the smallest npm-managed dependency update that clears high-severity advisories.
 - [x] Run `npm run check`, `npm run lint`, `npm run test`, `npm run build`, and `npm audit --audit-level=high`.
 - [x] Summarize changed dependency surface and any remaining risks.
+
+# Project Link Cleanup Checklist
+
+- [x] Remove the Case Study link from project data, rendering, and tests.
+- [x] Replace remaining project case-study wording with project-oriented copy.
+- [x] Run focused project tests and required static checks.
+- [x] List every unique project awaiting live and repository links.
+- [x] Populate verified WPS Generator live and repository links in both project collections.
+- [x] Replace Atomic UI Platform with De Bijenkorf in the featured project collection.
+- [x] Rename Carbon Tracking Web to FootPrint without changing its project details.
+- [x] Enforce new-tab behavior for every enabled project link.
+- [x] Enforce new-tab behavior for LinkedIn and GitHub links in Hero and Contact.
+- [x] Move the project catalog toggle below the grid and center it in both view modes.
+- [x] Add supplied public project URLs, hide unavailable repositories, and remove Payment Gateway.
+- [x] Add the High-Frequency Trading Terminal as a repository-only project.
+- [x] Correct the verified WPS, EuroParcs, and Wovar technology stacks.
+- [x] Simplify the EuroParcs, Wovar, and De Bijenkorf project titles.
+- [x] Keep Gistable explicitly marked as Live coming soon without a repository link.
+- [x] Add Next.js to the De Bijenkorf technology stack.
+- [x] Add Nuxt to the EuroParcs technology stack.
+- [x] Rename Atomic UI Platform to Atomic UI Library and add Storybook.
+- [x] Shorten Wovar Checkout to Wovar in both project collections.
+- [x] Shorten Core Connect Landing to Core Connect.
+- [x] Shorten EuroParcs Booking to EuroParcs in both project collections.
+- [x] Shorten De Bijenkorf API to De Bijenkorf in both project collections.
+- [x] Shorten Zabira Web Platform to Zabira.
+- [x] Shorten Gistable MVP to Gistable.
+- [x] Add more spacing above the centered project catalog toggle.
+- [x] Add Nuxt and Flutter to the FootPrint technology stack.
+- [x] Remove project problem/approach data and rename result to impact.
+- [x] Increase spacing above the project catalog toggle from `mt-8` to `mt-10`.
+
+# Experience Timeline Checklist
+
+- [x] Extract and visually verify the professional experience in `Gafar-Ajao-Resume-full.pdf`.
+- [x] Replace the partial portfolio timeline with all eight resume roles and dates.
+- [x] Align role labels and concise impact bullets with the resume.
+- [x] Add timeline contract coverage and run the required quality gates.
+- [x] Add Noema as the latest experience and verify the updated timeline.
+
+# Highlights Layout Checklist
+
+- [x] Ground Core Strengths in resume-supported capabilities.
+- [x] Remove Now Building from both portfolio view modes and the content contract.
+- [x] Resize the remaining cards and verify the highlights layout.
+
+# Experience Collapse Checklist
+
+- [x] Keep the four most recent experience entries visible by default.
+- [x] Represent remaining roles as a layered card stack.
+- [x] Expand and collapse the remaining cards with staggered slide transitions.
+- [x] Add interaction coverage and run the required quality gates.

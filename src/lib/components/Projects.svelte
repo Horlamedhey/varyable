@@ -31,20 +31,22 @@
 		};
 	});
 
-	function linkState(url: string, label: string): { href: string; label: string; enabled: boolean } {
-		if (hasFilledLink(url)) {
-			return { href: url, label, enabled: true };
+	function projectLinks(
+		project: ProjectItem
+	): { href: string; label: string; enabled: boolean }[] {
+		const links: { href: string; label: string; enabled: boolean }[] = [];
+
+		if (hasFilledLink(project.links.live)) {
+			links.push({ href: project.links.live, label: 'Live', enabled: true });
+		} else if (project.links.liveComingSoon) {
+			links.push({ href: '#', label: 'Live (Coming soon)', enabled: false });
 		}
 
-		return { href: '#', label: `${label} (Coming soon)`, enabled: false };
-	}
+		if (hasFilledLink(project.links.repo)) {
+			links.push({ href: project.links.repo, label: 'Repo', enabled: true });
+		}
 
-	function projectLinks(project: ProjectItem): { href: string; label: string; enabled: boolean }[] {
-		return [
-			linkState(project.links.live, 'Live'),
-			linkState(project.links.repo, 'Repo'),
-			linkState(project.links.caseStudy, 'Case Study')
-		];
+		return links;
 	}
 
 	function uniqueKey(project: ProjectItem, suffix: string): string {
@@ -68,18 +70,10 @@
 				>
 					<h4 class="text-2xl font-extrabold text-(--text)">{project.name}</h4>
 					<p class="mt-2 text-sm text-(--muted)">{project.blurb}</p>
-					<dl class="mt-4 space-y-2 text-sm">
+					<dl class="mt-4 text-sm">
 						<div>
-							<dt class="font-semibold text-(--text)">Problem</dt>
-							<dd class="text-(--muted)">{project.problem}</dd>
-						</div>
-						<div>
-							<dt class="font-semibold text-(--text)">Approach</dt>
-							<dd class="text-(--muted)">{project.approach}</dd>
-						</div>
-						<div>
-							<dt class="font-semibold text-(--text)">Result</dt>
-							<dd class="text-(--muted)">{project.result}</dd>
+							<dt class="font-semibold text-(--text)">Impact</dt>
+							<dd class="text-(--muted)">{project.impact}</dd>
 						</div>
 					</dl>
 					<div class="mt-4 flex flex-wrap gap-2">
@@ -101,13 +95,8 @@
 		</div>
 
 		<div>
-			<div class="mb-4 flex items-center justify-between gap-4">
+			<div class="mb-4">
 				<h3 class="text-2xl font-extrabold text-(--text)">All Projects</h3>
-				{#if canToggle}
-					<button class="btn-secondary" onclick={toggleExpanded} type="button">
-						{expanded ? 'Show less' : 'Show all projects'}
-					</button>
-				{/if}
 			</div>
 			<div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
 				{#each visibleProjects as project, index (uniqueKey(project, `all-${index}`))}
@@ -136,6 +125,13 @@
 					</article>
 				{/each}
 			</div>
+			{#if canToggle}
+				<div class="mt-10 flex justify-center">
+					<button class="btn-secondary" onclick={toggleExpanded} type="button">
+						{expanded ? 'Show less' : 'Show all projects'}
+					</button>
+				</div>
+			{/if}
 		</div>
 	</div>
 {:else}
@@ -152,21 +148,13 @@
 					data-flip-id={`project-featured-${project.slug}`}
 					style={`--tilt:${index % 2 === 0 ? '-0.55deg' : '0.55deg'}`}
 				>
-					<p class="project-kicker">Featured case</p>
+					<p class="project-kicker">Featured project</p>
 					<h4 class="project-name">{project.name}</h4>
 					<p class="project-blurb">{project.blurb}</p>
 					<dl class="project-notes">
 						<div class="project-note">
-							<dt>Problem</dt>
-							<dd>{project.problem}</dd>
-						</div>
-						<div class="project-note">
-							<dt>Approach</dt>
-							<dd>{project.approach}</dd>
-						</div>
-						<div class="project-note">
-							<dt>Result</dt>
-							<dd>{project.result}</dd>
+							<dt>Impact</dt>
+							<dd>{project.impact}</dd>
 						</div>
 					</dl>
 
@@ -195,11 +183,6 @@
 					<p class="annotation text-xl text-(--accent)">Full archive</p>
 					<h3 class="section-subhead">All Projects</h3>
 				</div>
-				{#if canToggle}
-					<button class="btn-secondary" onclick={toggleExpanded} type="button">
-						{expanded ? 'Show less' : 'Show all projects'}
-					</button>
-				{/if}
 			</div>
 			<div class="project-catalog">
 				{#each visibleProjects as project, index (uniqueKey(project, `all-${index}`))}
@@ -228,6 +211,13 @@
 					</article>
 				{/each}
 			</div>
+			{#if canToggle}
+				<div class="mt-10 flex justify-center">
+					<button class="btn-secondary" onclick={toggleExpanded} type="button">
+						{expanded ? 'Show less' : 'Show all projects'}
+					</button>
+				</div>
+			{/if}
 		</div>
 	</div>
 {/if}

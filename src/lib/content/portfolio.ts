@@ -3,8 +3,11 @@ import type { PortfolioData } from "$lib/types/portfolio";
 const sharedPlaceholderLinks = {
   live: "",
   repo: "",
-  caseStudy: "",
 };
+
+function liveOnlyLinks(live: string) {
+  return { live, repo: "" };
+}
 
 export const portfolio: PortfolioData = {
   brand: {
@@ -17,7 +20,7 @@ export const portfolio: PortfolioData = {
     subtitle:
       "I build fast, scalable products with measurable business outcomes, strong frontend architecture, and practical developer experience improvements.",
     location: "Muscat, Oman",
-    yearsExperience: "8+ years",
+    yearsExperience: "9+ years",
     stack: [
       "SvelteKit",
       "React",
@@ -62,10 +65,11 @@ export const portfolio: PortfolioData = {
       },
     ],
     strengths: [
-      "Performance tuning and Core Web Vitals",
-      "Component systems and design-token governance",
-      "Accessibility-first UI architecture",
-      "Cross-team frontend platform leadership",
+      "Modern JavaScript and TypeScript ecosystem expertise across React, Vue, and Svelte",
+      "Scalable frontend architecture and micro-frontends",
+      "Design systems and reusable component libraries",
+      "Performance optimization and accessibility",
+      "Product-focused engineering with measurable outcomes",
     ],
     toolbox: [
       "SvelteKit / TypeScript",
@@ -79,21 +83,26 @@ export const portfolio: PortfolioData = {
       "60+ reusable UI components",
       "Reusable primitives for forms, cards, and data presentation",
     ],
-    now: [
-      "Launching WPS Generator publicly with stronger credibility surface",
-      "Sharpening production-grade SvelteKit practices",
-      "Keeping UX motion subtle, accessible, and outcome-driven",
-    ],
   },
   experience: [
     {
+      company: "Noema",
+      role: "Senior Frontend Engineer",
+      period: "Feb 2025 - Present",
+      bullets: [
+        "Build and maintain enterprise-scale development banking applications using React, React Router, React Hook Form, and GraphQL.",
+        "Collaborate with designers and backend engineers to deliver seamless experiences, improving dashboard usability by 60%.",
+        "Work with two frontend engineers on an in-house library of 30+ reusable, performant components for consistent product UI and developer experience.",
+      ],
+    },
+    {
       company: "Rb2",
-      role: "Senior Full Stack Engineer",
+      role: "Senior Frontend Engineer (Full-Stack Contributions)",
       period: "Jan 2022 - Sep 2025",
       bullets: [
-        "Built and maintained high-performance frontend systems across React, Vue, and Svelte products.",
-        "Improved release velocity by 2x through CI/CD automation with zero-downtime deployment paths.",
-        "Increased customer engagement through cross-functional UX and backend optimization initiatives.",
+        "Increased customer engagement by roughly 40% through high-performance React, Next.js, Remix, Vue, and Nuxt systems.",
+        "Reduced cart abandonment by roughly 15% and improved booking conversions by roughly 30% across EuroParcs and Wovar.",
+        "Halved deployment time and doubled release frequency through GitHub Actions and zero-downtime CI/CD.",
       ],
     },
     {
@@ -101,9 +110,9 @@ export const portfolio: PortfolioData = {
       role: "Senior Frontend Engineer",
       period: "May 2024 - Jul 2024",
       bullets: [
-        "Designed MVP architecture and UI patterns for Gistable, outperforming engagement expectations.",
-        "Shipped 40+ reusable components that accelerated frontend delivery by roughly 40%.",
-        "Elevated performance and accessibility metrics to improve product usability and retention.",
+        "Led Gistable's frontend architecture and delivery, driving engagement roughly 30% above projections.",
+        "Built a reusable system of 40+ React, Vite, Vike, and Tailwind CSS components.",
+        "Reduced frontend development time by roughly 40% while improving performance and accessibility.",
       ],
     },
     {
@@ -111,19 +120,59 @@ export const portfolio: PortfolioData = {
       role: "Senior Mobile Engineer",
       period: "Feb 2024 - May 2024",
       bullets: [
-        "Restructured application architecture to remove instability and improve maintainability.",
-        "Integrated real-time observability with Sentry and reduced bug resolution time significantly.",
-        "Implemented automated testing strategy targeting production reliability.",
+        "Led the PIF React Native application, improving cross-platform performance and responsiveness by roughly 30%.",
+        "Achieved roughly 95% test coverage through automated pipelines that reduced production regressions.",
+        "Integrated Sentry and reduced bug resolution time by roughly 40%.",
+      ],
+    },
+    {
+      company: "Fluidangle LLC",
+      role: "Lead Mobile Engineer",
+      period: "Sep 2021 - Dec 2021",
+      bullets: [
+        "Led frontend architecture and UI delivery for cross-platform Flutter applications.",
+        "Reduced crashes and increased task completion rates by roughly 35%.",
+        "Improved responsive layouts, accessibility, and interactive mobile experiences.",
+      ],
+    },
+    {
+      company: "Aitechma",
+      role: "Senior Frontend Engineer",
+      period: "Jun 2021 - Sep 2021",
+      bullets: [
+        "Built Zabira's Angular and Tailwind CSS trading experience, increasing development speed by roughly 30%.",
+        "Improved engagement by roughly 25% through optimized transaction flows, dashboards, and business logic.",
+        "Boosted retention by roughly 15% through data-visualization and usability improvements.",
       ],
     },
     {
       company: "Footprint Intelligence",
-      role: "Software Engineering Manager",
+      role: "Software Engineering Manager (Hands-on)",
       period: "Sep 2020 - Jan 2022",
       bullets: [
-        "Led a cross-functional team delivering carbon-tracking products across web and mobile.",
-        "Improved backend scalability and query performance while maintaining strong UX quality.",
-        "Drove adoption through better gamification and data-visualization driven product experiences.",
+        "Led hands-on delivery of a Vue and Tailwind CSS carbon-emissions platform that helped users reduce environmental impact by roughly 20%.",
+        "Increased daily interactions by roughly 35% through a gamified cross-platform Flutter application.",
+        "Improved system performance and stability by roughly 35% while reducing database query times by roughly 25%.",
+      ],
+    },
+    {
+      company: "Anyskills Inc.",
+      role: "Frontend Engineer",
+      period: "Jul 2019 - Aug 2020",
+      bullets: [
+        "Improved frontend data-fetching efficiency by roughly 35% using a Vue.js BFF architecture with REST APIs.",
+        "Developed 35+ reusable Vue.js components with Vuex and Vuetify.",
+        "Contributed to a consistent design system and improved user experience.",
+      ],
+    },
+    {
+      company: "Override Digital Agency",
+      role: "Mobile & Full Stack Developer",
+      period: "Jul 2017 - Jun 2019",
+      bullets: [
+        "Integrated four payment gateways and crypto transfer endpoints using Ethers.js.",
+        "Reduced transaction latency by roughly 50% through serverless performance improvements.",
+        "Improved client conversion rates by roughly 35% through secure, accessible applications.",
       ],
     },
   ],
@@ -134,54 +183,46 @@ export const portfolio: PortfolioData = {
         name: "WPS Generator",
         blurb:
           "A practical utility product planned for public launch with credibility-focused presentation.",
-        problem:
-          "People need a reliable, low-friction way to generate and manage secure WPS workflows.",
-        approach:
-          "Built a clean UX with focused flows, dependable validation, and pragmatic architecture.",
-        result:
+        impact:
           "Prepared a launch-ready product foundation to support public distribution and trust.",
-        tech: ["SvelteKit", "TypeScript", "Tailwind CSS"],
-        links: { ...sharedPlaceholderLinks },
+        tech: [
+          "SvelteKit",
+          "TypeScript",
+          "Tailwind CSS",
+          "FastAPI",
+          "Python",
+          "OpenPyXL",
+        ],
+        links: {
+          live: "https://wps-sif-generator-beryl.vercel.app/",
+          repo: "https://github.com/Horlamedhey/wps-sif-generator",
+        },
       },
       {
         slug: "europarcs-booking-optimization",
-        name: "EuroParcs Booking Optimization",
+        name: "EuroParcs",
         blurb:
           "Conversion-oriented frontend and UX improvements on booking critical paths.",
-        problem:
-          "High-friction booking experience reduced completed reservations.",
-        approach:
-          "Refined journey architecture, performance, and usability around key interaction points.",
-        result: "Delivered measurable +30% booking uplift.",
-        tech: ["React", "Next.js", "A/B Testing"],
-        links: { ...sharedPlaceholderLinks },
+        impact: "Delivered measurable +30% booking uplift.",
+        tech: ["Vue", "Nuxt", "GraphQL", "Tailwind CSS"],
+        links: liveOnlyLinks("https://www.europarcs.com/"),
       },
       {
         slug: "wovar-checkout-performance",
-        name: "Wovar Checkout Performance",
+        name: "Wovar",
         blurb:
           "E-commerce performance and checkout-flow stabilization project.",
-        problem:
-          "Slow interactions and confusing checkout states increased abandonment.",
-        approach:
-          "Applied targeted performance optimizations and reduced UX friction in critical forms.",
-        result: "Reduced cart abandonment by 15%.",
-        tech: ["Vue", "Nuxt", "Performance Profiling"],
-        links: { ...sharedPlaceholderLinks },
+        impact: "Reduced cart abandonment by 15%.",
+        tech: ["Remix", "GraphQL", "TypeScript", "C#"],
+        links: liveOnlyLinks("https://www.wovar.com/"),
       },
       {
-        slug: "atomic-ui-platform",
-        name: "Atomic UI Platform",
-        blurb:
-          "Design-system initiative powering consistent, reusable product interfaces.",
-        problem:
-          "Teams repeatedly rebuilt similar UI and shipped inconsistent experiences.",
-        approach:
-          "Created reusable atomic components, tokens, and usage patterns.",
-        result:
-          "Improved consistency and significantly reduced frontend development time.",
-        tech: ["Tailwind CSS", "TypeScript", "Component Architecture"],
-        links: { ...sharedPlaceholderLinks },
+        slug: "de-bijenkorf-api-efficiency",
+        name: "De Bijenkorf",
+        blurb: "Backend and frontend query-path optimization effort.",
+        impact: "Improved query efficiency by roughly 30%.",
+        tech: ["Next.js", "Node.js", "PostgreSQL", "GraphQL"],
+        links: liveOnlyLinks("https://www.debijenkorf.nl/"),
       },
     ],
     all: [
@@ -189,135 +230,132 @@ export const portfolio: PortfolioData = {
         slug: "wps-generator",
         name: "WPS Generator",
         blurb: "Public-facing utility product with trust-centric presentation.",
-        problem: "Lack of reliable and easy-to-use WPS workflow tooling.",
-        approach:
-          "Designed robust, user-focused flows with strong validation and clear feedback.",
-        result:
+        impact:
           "Positioned for public launch with portfolio-backed credibility.",
-        tech: ["SvelteKit", "TypeScript", "Tailwind CSS"],
-        links: { ...sharedPlaceholderLinks },
+        tech: [
+          "SvelteKit",
+          "TypeScript",
+          "Tailwind CSS",
+          "FastAPI",
+          "Python",
+          "OpenPyXL",
+        ],
+        links: {
+          live: "https://wps-sif-generator-beryl.vercel.app/",
+          repo: "https://github.com/Horlamedhey/wps-sif-generator",
+        },
+      },
+      {
+        slug: "high-frequency-trading-terminal",
+        name: "High-Frequency Trading Terminal",
+        blurb:
+          "A real-time Flutter terminal engineered for reliable high-frequency trade streams.",
+        impact:
+          "Handled 20-100 events per second with O(1) rolling analytics, bounded UI updates, and deterministic unit, integration, and golden tests.",
+        tech: [
+          "Flutter",
+          "Dart",
+          "Riverpod",
+          "Clean Architecture",
+          "Deterministic Testing",
+        ],
+        links: {
+          live: "",
+          repo: "https://github.com/Horlamedhey/trading",
+        },
       },
       {
         slug: "atomic-ui-platform",
-        name: "Atomic UI Platform",
+        name: "Atomic UI Library",
         blurb:
           "Design-system initiative powering consistent, reusable product interfaces.",
-        problem:
-          "Teams repeatedly rebuilt similar UI and shipped inconsistent experiences.",
-        approach:
-          "Created reusable atomic components, tokens, and usage patterns.",
-        result: "Improved consistency and reduced frontend development time.",
-        tech: ["Tailwind CSS", "TypeScript", "Component Architecture"],
+        impact: "Improved consistency and reduced frontend development time.",
+        tech: [
+          "Tailwind CSS",
+          "TypeScript",
+          "Storybook",
+          "Component Architecture",
+        ],
         links: { ...sharedPlaceholderLinks },
       },
       {
         slug: "europarcs-booking-optimization",
-        name: "EuroParcs Booking Optimization",
+        name: "EuroParcs",
         blurb:
           "Conversion-oriented frontend and UX improvements on booking critical paths.",
-        problem:
-          "High-friction booking experience reduced completed reservations.",
-        approach:
-          "Refined journey architecture, performance, and usability around key interaction points.",
-        result: "Delivered measurable +30% booking uplift.",
-        tech: ["React", "Next.js", "A/B Testing"],
-        links: { ...sharedPlaceholderLinks },
+        impact: "Delivered measurable +30% booking uplift.",
+        tech: ["Vue", "Nuxt", "GraphQL", "Tailwind CSS"],
+        links: liveOnlyLinks("https://www.europarcs.com/"),
       },
       {
         slug: "wovar-checkout-performance",
-        name: "Wovar Checkout Performance",
+        name: "Wovar",
         blurb:
           "E-commerce performance and checkout-flow stabilization project.",
-        problem:
-          "Slow interactions and confusing checkout states increased abandonment.",
-        approach:
-          "Applied targeted performance optimizations and reduced UX friction in critical forms.",
-        result: "Reduced cart abandonment by 15%.",
-        tech: ["Vue", "Nuxt", "Performance Profiling"],
-        links: { ...sharedPlaceholderLinks },
+        impact: "Reduced cart abandonment by 15%.",
+        tech: ["Remix", "GraphQL", "TypeScript", "C#"],
+        links: liveOnlyLinks("https://www.wovar.com/"),
       },
       {
         slug: "core-connect-landing",
-        name: "Core Connect Landing",
+        name: "Core Connect",
         blurb: "SaaS landing page with conversion-focused interaction design.",
-        problem: "Lead acquisition performance was below growth targets.",
-        approach:
-          "Built clear value hierarchy, trust blocks, and optimized CTA structure.",
-        result: "Increased lead conversions by 40%.",
+        impact: "Increased lead conversions by 40%.",
         tech: ["React", "Tailwind CSS", "Analytics"],
-        links: { ...sharedPlaceholderLinks },
+        links: liveOnlyLinks("https://coreconnect.com/"),
       },
       {
         slug: "de-bijenkorf-api-efficiency",
-        name: "De Bijenkorf API Efficiency",
+        name: "De Bijenkorf",
         blurb: "Backend and frontend query-path optimization effort.",
-        problem:
-          "Endpoint and query inefficiencies slowed customer-facing features.",
-        approach:
-          "Refactored endpoint patterns and improved API integration strategy.",
-        result: "Improved query efficiency by roughly 30%.",
-        tech: ["Node.js", "PostgreSQL", "GraphQL"],
-        links: { ...sharedPlaceholderLinks },
+        impact: "Improved query efficiency by roughly 30%.",
+        tech: ["Next.js", "Node.js", "PostgreSQL", "GraphQL"],
+        links: liveOnlyLinks("https://www.debijenkorf.nl/"),
       },
       {
         slug: "gistable-mvp",
-        name: "Gistable MVP",
+        name: "Gistable",
         blurb:
           "MVP product architecture and UI system built for fast validation.",
-        problem: "Need to launch quickly without sacrificing product quality.",
-        approach:
-          "Established scalable frontend architecture and reusable component system.",
-        result: "User engagement exceeded initial estimates by around 30%.",
+        impact: "User engagement exceeded initial estimates by around 30%.",
         tech: ["React", "Redux", "Vite", "Tailwind CSS"],
-        links: { ...sharedPlaceholderLinks },
+        links: {
+          live: "",
+          repo: "",
+          liveComingSoon: true,
+        },
       },
       {
         slug: "pif-mobile-app",
         name: "PIF Mobile App",
         blurb: "Cross-platform mobile engineering and stability modernization.",
-        problem:
-          "Legacy structure caused instability and poor runtime behavior.",
-        approach:
-          "Restructured app architecture and strengthened quality pipeline.",
-        result: "Delivered performance gains and improved app reliability.",
+        impact: "Delivered performance gains and improved app reliability.",
         tech: ["React Native", "Sentry", "Automated Testing"],
         links: { ...sharedPlaceholderLinks },
       },
       {
         slug: "zabira-web-platform",
-        name: "Zabira Web Platform",
+        name: "Zabira",
         blurb:
           "Crypto and gift-card trading platform with improved transaction UX.",
-        problem: "Transaction flows and dashboards lacked clarity and speed.",
-        approach:
-          "Built focused interfaces and refined business-logic integrations.",
-        result: "Drove stronger engagement and retention metrics.",
+        impact: "Drove stronger engagement and retention metrics.",
         tech: ["Angular", "Tailwind CSS", "Dashboard UX"],
-        links: { ...sharedPlaceholderLinks },
+        links: liveOnlyLinks("https://www.zabira.com/"),
       },
       {
         slug: "carbon-tracking-web",
-        name: "Carbon Tracking Web",
+        name: "FootPrint",
         blurb: "Web experience for emissions tracking and action planning.",
-        problem:
-          "Users needed practical visibility into footprint reduction opportunities.",
-        approach:
-          "Led product delivery across frontend UX and cloud-backed data pipelines.",
-        result: "Improved user engagement and operational scalability.",
-        tech: ["Vue", "Tailwind CSS", "Firebase", "MongoDB Realm"],
-        links: { ...sharedPlaceholderLinks },
-      },
-      {
-        slug: "payment-gateway-platform",
-        name: "Payment Gateway Platform Integrations",
-        blurb:
-          "Transaction infrastructure and latency optimization initiative.",
-        problem: "Slow payment flows reduced trust and conversion rates.",
-        approach:
-          "Integrated multiple gateways and optimized backend transaction paths.",
-        result: "Reduced transaction latency by around 50%.",
-        tech: ["Node.js", "Serverless", "API Integrations"],
-        links: { ...sharedPlaceholderLinks },
+        impact: "Improved user engagement and operational scalability.",
+        tech: [
+          "Vue",
+          "Nuxt",
+          "Flutter",
+          "Tailwind CSS",
+          "Firebase",
+          "MongoDB Realm",
+        ],
+        links: liveOnlyLinks("https://www.footprint-intelligence.com/"),
       },
     ],
   },
@@ -364,7 +402,7 @@ export const portfolio: PortfolioData = {
   seo: {
     title: "Abdulgafar Ajao ‹VaryAble/› | Senior Frontend & Full-Stack Engineer",
     description:
-      "Portfolio of Abdulgafar Ajao showcasing production-grade frontend engineering, measurable business outcomes, and selected project case studies.",
+      "Portfolio of Abdulgafar Ajao showcasing production-grade frontend engineering, measurable business outcomes, and selected projects.",
     siteName: "VaryAble",
     siteUrl: "https://varyable.dev/",
     image: "https://varyable.dev/og-image.png",
