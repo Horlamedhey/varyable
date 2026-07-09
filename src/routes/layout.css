@@ -1340,6 +1340,14 @@ dd {
   font-size: 1.1rem;
 }
 
+.experience-visible-item {
+  position: relative;
+}
+
+.experience-visible-item > .timeline-marker {
+  z-index: 3;
+}
+
 .experience-overflow-grid {
   display: grid;
   gap: 1rem;

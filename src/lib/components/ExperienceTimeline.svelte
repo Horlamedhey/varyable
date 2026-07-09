@@ -172,22 +172,24 @@
 {:else}
 	<div class="timeline-stack" data-flip-absolute data-flip-id="experience-shell">
 		{#each initialExperience as item, index (item.company)}
-			<article
-				class="hand-card timeline-card"
-				data-flip-absolute
-				data-flip-id={`experience-${item.company}`}
-				style={`--tilt:${index % 2 === 0 ? '-0.6deg' : '0.65deg'}`}
-			>
+			<div class="experience-visible-item">
 				<span aria-hidden="true" class="timeline-marker"></span>
-				<p class="timeline-period">{item.period}</p>
-				<h3 class="timeline-company">{item.company}</h3>
-				<p class="timeline-role">{item.role}</p>
-				<ul class="hand-list compact">
-					{#each item.bullets as bullet (bullet)}
-						<li>{bullet}</li>
-					{/each}
-				</ul>
-			</article>
+				<article
+					class="hand-card timeline-card"
+					data-flip-absolute
+					data-flip-id={`experience-${item.company}`}
+					style={`--tilt:${index % 2 === 0 ? '-0.6deg' : '0.65deg'}`}
+				>
+					<p class="timeline-period">{item.period}</p>
+					<h3 class="timeline-company">{item.company}</h3>
+					<p class="timeline-role">{item.role}</p>
+					<ul class="hand-list compact">
+						{#each item.bullets as bullet (bullet)}
+							<li>{bullet}</li>
+						{/each}
+					</ul>
+				</article>
+			</div>
 		{/each}
 
 		{#if canExpand}
