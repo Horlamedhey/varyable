@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { onMount } from 'svelte';
 	import type { ProjectItem, ProjectsData } from '$lib/types/portfolio';
 	import { getInitialProjectCount, getVisibleProjects, hasFilledLink } from '$lib/utils/projects';
 	import { viewMode, type ViewMode } from '$lib/stores/view-mode';
 
-	let { projects, mode = 'focused' } = $props<{ projects: ProjectsData; mode?: ViewMode }>();
+	let { projects, mode = 'focused' }: { projects: ProjectsData; mode?: ViewMode } = $props();
 	const renderMode = $derived(browser ? $viewMode : mode);
 
 	let expanded = $state(false);

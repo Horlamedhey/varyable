@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { transitionViewMode } from '$lib/animations/view-mode-morph';
 	import { isViewTransitioning, viewMode, type ViewMode } from '$lib/stores/view-mode';
 
-	let { mode = 'focused' } = $props<{ mode?: ViewMode }>();
+	let { mode = 'focused' }: { mode?: ViewMode } = $props();
 	const renderMode = $derived(browser ? $viewMode : mode);
 
 	const options: { label: string; value: ViewMode }[] = [

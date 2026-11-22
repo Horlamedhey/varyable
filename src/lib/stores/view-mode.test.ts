@@ -3,7 +3,7 @@ import { get } from 'svelte/store';
 import type { Writable } from 'svelte/store';
 import type { ViewMode } from './view-mode';
 
-vi.mock('$app/environment', () => ({ browser: true }));
+vi.mock('$app/env', () => ({ browser: true }));
 
 interface ViewModeModule {
 	viewMode: Writable<ViewMode>;

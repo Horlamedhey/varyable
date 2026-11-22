@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { onMount } from 'svelte';
 	import { tick } from 'svelte';
 	import type { ExperienceItem } from '$lib/types/portfolio';
 	import { viewMode, type ViewMode } from '$lib/stores/view-mode';
 
-	let { experience, mode = 'focused' } = $props<{ experience: ExperienceItem[]; mode?: ViewMode }>();
+	let { experience, mode = 'focused' }: { experience: ExperienceItem[]; mode?: ViewMode } = $props();
 	const renderMode = $derived(browser ? $viewMode : mode);
 	const initialCount = 4;
 	const initialExperience = $derived(experience.slice(0, initialCount));
