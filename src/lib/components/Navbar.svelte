@@ -1,17 +1,17 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import type { BrandData, NavSection } from '$lib/types/portfolio';
 	import { onMount } from 'svelte';
 	import ViewModeSwitch from '$lib/components/ViewModeSwitch.svelte';
 	import { viewMode, type ViewMode } from '$lib/stores/view-mode';
 
-	let { brand, sections, activeSection, onSectionSelect, mode = 'focused' } = $props<{
+	let { brand, sections, activeSection, onSectionSelect, mode = 'focused' }: {
 		brand: BrandData;
 		sections: NavSection[];
 		activeSection: string;
 		onSectionSelect?: (sectionId: string) => void;
 		mode?: ViewMode;
-	}>();
+	} = $props();
 
 	let isScrolled = $state(false);
 	const renderMode = $derived(browser ? $viewMode : mode);

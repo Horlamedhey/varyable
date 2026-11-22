@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import type { ContactData } from '$lib/types/portfolio';
 	import { viewMode, type ViewMode } from '$lib/stores/view-mode';
 
-	let { contact, mode = 'focused' } = $props<{ contact: ContactData; mode?: ViewMode }>();
+	let { contact, mode = 'focused' }: { contact: ContactData; mode?: ViewMode } = $props();
 	let toastVisible = $state(false);
 	const renderMode = $derived(browser ? $viewMode : mode);
 

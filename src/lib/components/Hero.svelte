@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import type { HeroData } from '$lib/types/portfolio';
 	import { viewMode, type ViewMode } from '$lib/stores/view-mode';
 
@@ -9,12 +9,12 @@
 		iconPath: string;
 	}
 
-	let { hero, name, tag, mode = 'focused' } = $props<{
+	let { hero, name, tag, mode = 'focused' }: {
 		hero: HeroData;
 		name: string;
 		tag: string;
 		mode?: ViewMode;
-	}>();
+	} = $props();
 	const renderMode = $derived(browser ? $viewMode : mode);
 
 	const socialLinks = $derived.by(
