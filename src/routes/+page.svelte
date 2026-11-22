@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import BentoHighlights from '$lib/components/BentoHighlights.svelte';
 	import ContactCTA from '$lib/components/ContactCTA.svelte';
 	import ExperienceTimeline from '$lib/components/ExperienceTimeline.svelte';
@@ -13,7 +13,7 @@
 	import { onMount, tick } from 'svelte';
 	import type { PageData } from './$types';
 
-	let { data } = $props<{ data: PageData }>();
+	let { data }: { data: PageData } = $props();
 	const portfolio = $derived(data.portfolio);
 	const renderMode = $derived(browser ? $viewMode : data.initialViewMode);
 

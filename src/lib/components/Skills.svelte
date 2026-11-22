@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import type { SkillsData } from '$lib/types/portfolio';
 	import { viewMode, type ViewMode } from '$lib/stores/view-mode';
 
-	let { skills, mode = 'focused' } = $props<{ skills: SkillsData; mode?: ViewMode }>();
+	let { skills, mode = 'focused' }: { skills: SkillsData; mode?: ViewMode } = $props();
 	const renderMode = $derived(browser ? $viewMode : mode);
 </script>
 

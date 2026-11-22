@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import type { HighlightsData } from '$lib/types/portfolio';
 	import { viewMode, type ViewMode } from '$lib/stores/view-mode';
 
-	let { highlights, mode = 'focused' } = $props<{ highlights: HighlightsData; mode?: ViewMode }>();
+	let { highlights, mode = 'focused' }: { highlights: HighlightsData; mode?: ViewMode } = $props();
 	const renderMode = $derived(browser ? $viewMode : mode);
 </script>
 

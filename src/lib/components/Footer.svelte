@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { browser } from '$app/environment';
+	import { browser } from '$app/env';
 	import { viewMode, type ViewMode } from '$lib/stores/view-mode';
 
-	let { year, name, mode = 'focused' } = $props<{ year: number; name: string; mode?: ViewMode }>();
+	let { year, name, mode = 'focused' }: { year: number; name: string; mode?: ViewMode } = $props();
 	const renderMode = $derived(browser ? $viewMode : mode);
 </script>
 

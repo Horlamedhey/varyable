@@ -2,7 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { get } from 'svelte/store';
 import type { ViewMode } from '$lib/stores/view-mode';
 
-vi.mock('$app/environment', () => ({ browser: true }));
+vi.mock('$app/env', () => ({ browser: true }));
 
 const registerPlugin = vi.fn();
 const gsapFromTo = vi.fn(() => ({}));
