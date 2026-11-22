@@ -302,7 +302,7 @@ export const portfolio: PortfolioData = {
         blurb: "SaaS landing page with conversion-focused interaction design.",
         impact: "Increased lead conversions by 40%.",
         tech: ["React", "Tailwind CSS", "Analytics"],
-        links: liveOnlyLinks("https://coreconnect.com/"),
+        links: liveOnlyLinks("https://www.core-connect.io/en"),
       },
       {
         slug: "de-bijenkorf-api-efficiency",
