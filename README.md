@@ -10,7 +10,7 @@ Production-grade SvelteKit portfolio for AbdulGafar `<VaryAble/>`.
 - Vitest + Testing Library
 - Playwright
 - ESLint (flat config)
-- Vercel adapter
+- Cloudflare Workers adapter
 
 ## Commands
 
@@ -23,4 +23,12 @@ Production-grade SvelteKit portfolio for AbdulGafar `<VaryAble/>`.
 
 ## Quality Gates
 
-The repository policy is defined in `/Users/varyable/Workspace/webdev/varyable/AGENTS.md` and enforced in CI.
+The repository policy is defined in [`AGENTS.md`](AGENTS.md) and enforced in CI.
+
+## Production deployment
+
+Cloudflare Workers Builds follows `main` and deploys the `varyable-production` Worker. The build command is `npm run build`, and the deploy command is `npx --no-install wrangler deploy`. Keep branch previews disabled for this production Worker. Cloudflare holds the deployment credential; GitHub Actions runs the quality checks and needs no Cloudflare secrets.
+
+Use a passing pull request before merging to `main`. Production deploys leave the two dashboard-managed custom domains in place; do not add them to the Wrangler configuration. The `workers-preview` branch and Worker remain separate.
+
+Verify the live site with `bash scripts/smoke-production-worker.sh`. If a production release fails, select the previous known-good version in the Worker's Cloudflare Deployments tab, then revert the failing change on `main` through a pull request.
