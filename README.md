@@ -27,6 +27,8 @@ The repository policy is defined in [`AGENTS.md`](AGENTS.md) and enforced in CI.
 
 ## Production deployment
 
-A passing CI run on a push to `main` deploys the `varyable-production` Worker using the GitHub `production` environment. Configure `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` as secrets in that environment. Scope the token to deploying this existing Worker where supported. Cloudflare manages the two custom domains separately; do not add them to the Wrangler deployment configuration.
+Cloudflare Workers Builds follows `main` and deploys the `varyable-production` Worker. The build command is `npm run build`, and the deploy command is `npx --no-install wrangler deploy`. Keep branch previews disabled for this production Worker. Cloudflare holds the deployment credential; GitHub Actions runs the quality checks and needs no Cloudflare secrets.
 
-The `workers-preview` branch remains separate. If a production release fails, select the last known-good version in Cloudflare Workers & Pages → varyable-production → Deployments and roll back, then revert the failing change on `main`. Keep the Pages fallback until automatic production deployment and live checks are verified.
+Use a passing pull request before merging to `main`. Production deploys leave the two dashboard-managed custom domains in place; do not add them to the Wrangler configuration. The `workers-preview` branch and Worker remain separate.
+
+Verify the live site with `bash scripts/smoke-production-worker.sh`. If a production release fails, select the previous known-good version in the Worker's Cloudflare Deployments tab, then revert the failing change on `main` through a pull request.
